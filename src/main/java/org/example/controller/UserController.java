@@ -35,7 +35,9 @@ public class UserController {
     @PostMapping("/verify")
     public String verifyUser(@RequestParam("email") String email, @RequestParam("code") String code) {
         boolean verified = userService.verify(email, code);
-        return verified ? "success" : "failure";
+        return verified ? "index" : "failure";
+
+
 
     }
 
