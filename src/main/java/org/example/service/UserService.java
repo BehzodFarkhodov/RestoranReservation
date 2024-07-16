@@ -13,20 +13,26 @@ import java.util.UUID;
 public class UserService extends BaseService<UserEntity, UserRepo> {
     @Autowired
     private VerificationService verificationService;
+    @Autowired
+
     private UserRepo userRepo;
+
     public UserService(UserRepo repository) {
         super(repository);
     }
-    public void save(UserEntity user){
+
+    public void save(UserEntity user) {
         repository.save(user);
     }
+
     public void register(String username, String email) {
         String code = UUID.randomUUID().toString();
-        verificationService.sendVerificationCode(email, code);
+        String g=code.substring(0,4);
+        verificationService.sendVerificationCode(email, g);
         UserEntity user = new UserEntity();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPassword(code);
+        user.setPassword(g);
         userRepo.save(user);
     }
 
