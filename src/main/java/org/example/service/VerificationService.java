@@ -32,16 +32,14 @@ public class VerificationService {
     private String password;
 
     public void sendVerificationCode(String email, String code) {
-        String host = "smtp.example.com";
-        final String user = "behzodfarhodov13@gmail.com";
-        final String password = "";
+        final String user = "muxammadaminartikov@gmail.com";
+        final String password = "aaebzfihlumxxoyn";
 
         Properties props = new Properties();
-        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "465");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.ssl.trust", "smtp.example.com");
-
+        props.put("mail.smtp.ssl.enable", "true");
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {

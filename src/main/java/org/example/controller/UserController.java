@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
     @Autowired
     private UserService userService;
+
     @GetMapping("/register")
     public String showRegistrationForm() {
         return "register";
