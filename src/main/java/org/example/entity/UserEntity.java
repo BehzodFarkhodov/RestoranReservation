@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.enumertaror.UserRole;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +15,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
-    private String name;
     private String username;
     private String password;
+    private String email;
+    private UserRole role;
 }
