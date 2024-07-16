@@ -37,6 +37,8 @@ public class UserController {
         boolean verified = userService.verify(email, code);
         return verified ? "index" : "failure";
 
+
+
     }
 
 
