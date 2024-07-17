@@ -12,10 +12,10 @@
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/login" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br>
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br>
+    <input type="text" id="email" name="email" required><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
     <button type="submit">Login</button>
 </form>
 </body>
