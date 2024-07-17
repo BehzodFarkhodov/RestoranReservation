@@ -42,7 +42,7 @@ public class UserController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@ModelAttribute UserEntity user, HttpSession session) {
-        UserEntity login = userService.login(user.getUsername(), user.getEmail());
+        userService.login(user.getEmail(), user.getPassword());
         session.setAttribute("userId", UUID.randomUUID());
         return "index";
     }

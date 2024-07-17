@@ -19,10 +19,10 @@ public class UserRepo extends BaseRepo<UserEntity> {
 
 
     @Transactional
-    public Optional<UserEntity> signIn(String username, String email) {
-        UserEntity user = manager.createQuery("select u from  UserEntity  u  where u.username = :username and u.email = :email", UserEntity.class).
-                setParameter("username", username)
-                .setParameter("email", email)
+    public Optional<UserEntity> signIn(String email, String password) {
+        UserEntity user = manager.createQuery("select u from  UserEntity  u  where u.email = :email and u.password = :password", UserEntity.class).
+                setParameter("email", email)
+                .setParameter("password", password)
                 .getSingleResult();
 
         if (Objects.isNull(user)) {

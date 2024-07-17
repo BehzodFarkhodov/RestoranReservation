@@ -3,7 +3,6 @@ package org.example.service;
 import org.example.entity.UserEntity;
 import org.example.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -41,7 +40,7 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
         if (users.isPresent()) {
             UserEntity user = users.get();
             if (user.getPassword().equals(code)) {
-                user.setPassword(null);
+                user.setPassword(code);
                 userRepo.save(user);
                 return true;
             }
@@ -50,8 +49,8 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
     }
 
 
-    public UserEntity login(String username, String email) {
-        Optional<UserEntity> userEntity = repository.signIn(username, email);
+    public UserEntity login(String email, String password) {
+        Optional<UserEntity> userEntity = repository.signIn(email, password);
         return userEntity.orElseThrow(() -> new RuntimeException("user not found "));
     }
 }
