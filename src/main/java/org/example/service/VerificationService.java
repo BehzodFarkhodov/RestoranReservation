@@ -1,17 +1,17 @@
 package org.example.service;
 
-import lombok.Setter;
-import org.example.entity.UserEntity;
+
+
 import org.example.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
-import javax.mail.internet.AddressException;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.Optional;
+
 import java.util.Properties;
 @Service
 public class VerificationService {
