@@ -31,6 +31,7 @@ public class VerificationService {
     @Value("${smtp.password}")
     private String password;
 
+
     public void sendVerificationCode(String email, String code) {
         final String user = "muxammadaminartikov@gmail.com";
         final String password = "aaebzfihlumxxoyn";
@@ -39,7 +40,7 @@ public class VerificationService {
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.starttls.enable", "true");
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
