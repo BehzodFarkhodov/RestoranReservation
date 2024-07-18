@@ -35,6 +35,7 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
         userRepo.save(user);
     }
 
+
     public boolean verify(String email, String code) {
         Optional<UserEntity> users = userRepo.findByEmail(email);
         if (users.isPresent()) {
