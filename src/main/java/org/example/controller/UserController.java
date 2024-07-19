@@ -49,7 +49,7 @@ public class UserController {
     public String login(@ModelAttribute UserEntity user, HttpSession session) {
         userService.login(user.getEmail(), user.getPassword());
         session.setAttribute("userId", UUID.randomUUID());
-        return "user-menu";
+        return "create-restaurant";
     }
 
 
