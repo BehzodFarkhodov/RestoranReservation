@@ -2,7 +2,6 @@ package org.example.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-// dispatcher servlet ni web.xml ga yozish o'rniga
 public class    AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
