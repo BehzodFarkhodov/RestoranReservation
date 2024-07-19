@@ -40,12 +40,19 @@ public class UserController {
     }
 
 
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
+    }
+
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@ModelAttribute UserEntity user, HttpSession session) {
         userService.login(user.getEmail(), user.getPassword());
         session.setAttribute("userId", UUID.randomUUID());
-        return "index";
+        return "user-menu";
     }
+
+
 
 
 }

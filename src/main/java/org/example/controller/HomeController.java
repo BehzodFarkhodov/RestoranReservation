@@ -11,6 +11,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String start() {
-        return "register";
+        return "index";
     }
 }

@@ -58,4 +58,5 @@ public class HibernateConfig {
     public HibernateTransactionManager transactionManager(@Autowired LocalSessionFactoryBean localSessionFactoryBean) {
         return new HibernateTransactionManager(localSessionFactoryBean.getObject());
     }
+
 }
