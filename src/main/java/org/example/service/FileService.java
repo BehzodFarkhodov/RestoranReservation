@@ -61,7 +61,10 @@ public class FileService {
 //        }
 //    }
 //
-public String saveFile(MultipartFile file, boolean isImage) throws IOException {
+//
+
+
+    public String saveFile(MultipartFile file, boolean isImage) throws IOException {
     if (isImage) {
         checkImageContentType(file);
     } else {
@@ -98,6 +101,9 @@ public String saveFile(MultipartFile file, boolean isImage) throws IOException {
             throw new InvalidInputException("only pdfs are accepted");
         }
     }
+
+
+
 
 
 

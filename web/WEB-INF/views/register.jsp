@@ -8,7 +8,8 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #f8f9fa, #9381ff);
+            background: url('https://i.pinimg.com/originals/43/71/97/437197fdd0a42f3cdf72dc86e16f2a12.jpg') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,11 +18,13 @@
         }
 
         .container {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.9); /* Yengilroq fon */
             padding: 20px 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            max-width: 500px; /* Formaning maksimal kengligini belgilash */
+            width: 100%;
         }
 
         .container h1 {

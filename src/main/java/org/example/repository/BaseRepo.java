@@ -23,4 +23,6 @@ public class BaseRepo <T extends BaseEntity> {
         return manager.find(type,id);
     }
 
+
+
 }
