@@ -9,8 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-
-// spring config.xml ni o'rniga
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "org.example")

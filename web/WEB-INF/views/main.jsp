@@ -55,7 +55,7 @@
         }
         .header .registration-buttons {
             display: flex;
-            gap: 10px; /* Masofani kichraytirish */
+            gap: 10px;
         }
         .header .registration-button {
             padding: 10px 20px;
@@ -72,7 +72,7 @@
             background-color: #d19e00;
         }
         .header .logo {
-            height: 50px; /* Logotip balandligini kerakli darajada o'zgartiring */
+            height: 50px;
             margin-right: 20px;
         }
     </style>
@@ -86,7 +86,7 @@
             <button type="button" class="btn">Search</button>
         </div>
     </div>
-    <img src="https://via.placeholder.com/150" alt="Logo" class="logo">
+<%--    <img src="https://via.placeholder.com/150" alt="Logo" class="logo">--%>
     <div class="registration-buttons">
         <a href="${pageContext.request.contextPath}/register" class="registration-button">Register</a>
         <a href="${pageContext.request.contextPath}/login" class="registration-button">Log In</a>
