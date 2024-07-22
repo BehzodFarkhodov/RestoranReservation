@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @AllArgsConstructor
 public class HomeController {
-
-
     @RequestMapping("/")
     public String start() {
         return "main";
