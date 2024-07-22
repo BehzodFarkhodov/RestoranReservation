@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import org.example.entity.BaseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 public class BaseRepo <T extends BaseEntity> {
@@ -27,5 +28,11 @@ public class BaseRepo <T extends BaseEntity> {
         manager.persist(entity);
         return entity;
     }
+
+    @Transactional
+    public List<T> findAll() {
+        return manager.createQuery("from " + type.getName(), type).getResultList();
+    }
+
 
 }
