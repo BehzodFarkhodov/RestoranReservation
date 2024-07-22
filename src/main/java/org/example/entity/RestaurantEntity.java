@@ -25,6 +25,6 @@ public class RestaurantEntity extends BaseEntity {
     private RestaurantType type;
     private String picturePath;
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
-    private List<MenuEntity> menu;
+    private List<ProductEntity> menu;
 
 }

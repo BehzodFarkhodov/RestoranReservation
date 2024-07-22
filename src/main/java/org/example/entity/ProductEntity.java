@@ -9,16 +9,17 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "menu")
+@Table(name = "product")
 @ToString
 @Builder
 @Entity
-public class MenuEntity extends BaseEntity {
+public class ProductEntity extends BaseEntity {
     private String foodName;
     private String foodDescription;
     private double price;
     private String imagePath;
+    private Integer quantity;
     @ManyToOne
     private RestaurantEntity restaurant;
-
 }
+
