@@ -13,7 +13,7 @@ import lombok.*;
 @ToString
 @Builder
 @Entity
-public class Product extends BaseEntity {
+public class ProductEntity extends BaseEntity {
     private String foodName;
     private String foodDescription;
     private double price;
