@@ -15,9 +15,11 @@ public class RestaurantRepo extends BaseRepo<RestaurantEntity> {
         return "saved";
     }
 
-   public List<RestaurantEntity> findAll() {
+    public List<RestaurantEntity> findAll() {
         return manager.createQuery("from RestaurantEntity", RestaurantEntity.class).getResultList();
     }
+
+
 
 
 
