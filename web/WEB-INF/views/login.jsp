@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Victus
-  Date: 7/17/2024
-  Time: 2:20 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +6,8 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #f8f9fa, #9381ff);
+            background: url('https://observer.com/wp-content/uploads/sites/2/2016/05/sixtyfive-10496_rgb.jpg?quality=80&strip') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,7 +16,7 @@
         }
 
         .container {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
