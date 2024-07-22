@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class RestaurantController {
@@ -21,7 +22,7 @@ public class RestaurantController {
     @Autowired
     private FileService fileService;
 
-
+/*
     @GetMapping("/create-restaurant")
     public String showCreateRestaurantForm(Model model) {
         model.addAttribute("restaurant", new RestaurantEntity());
@@ -29,10 +30,6 @@ public class RestaurantController {
         model.addAttribute("restaurantTypes", types);
         return "create-restaurant";
     }
-
-
-
-
 
 
     @PostMapping("/create-restaurant")
@@ -67,12 +64,52 @@ public class RestaurantController {
     public String getAllRestaurants(Model model) {
         model.addAttribute("restaurants", restaurantService.getAll());
         return "restaurants";
+    }*/
+
+
+
+
+    /*       said4ik controller*/
+
+
+    @GetMapping("/create-restaurant")
+    public String createRestaurantPage() {
+        return "create-restaurant";
     }
 
 
+    @RequestMapping(value = "/create-restaurant", method = RequestMethod.POST)
+    public String createRestaurant(@RequestParam("name") String name,
+                                   @RequestParam("address") String address,
+                                   @RequestParam("location") String location,
+                                   @RequestParam("phone") String phone,
+                                   @RequestParam("type") RestaurantType type,
+                                   @RequestParam("picturePath") MultipartFile picture,
+                                   Model model) {
+
+        RestaurantEntity restaurant = RestaurantEntity.builder()
+                .name(name)
+                .address(address)
+                .location(location)
+                .phone(phone)
+                .type(type)
+                .build();
 
 
+        restaurantService.save(restaurant);
+        List<RestaurantEntity> all = restaurantService.getAll();
+
+        model.addAttribute("restaurants", all);
 
 
+        try {
+            fileService.saveFile(picture, true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return "create-restaurant";
+
+
+    }
 
 }
