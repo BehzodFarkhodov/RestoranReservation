@@ -10,12 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import java.io.IOException;
-import java.util.Arrays;
 
 @Controller
 public class RestaurantController {
@@ -23,7 +17,6 @@ public class RestaurantController {
     private RestaurantService restaurantService;
     @Autowired
     private FileService fileService;
-
 
     @GetMapping("/create-restaurant")
     public String showCreateRestaurantForm(Model model) {
@@ -35,48 +28,15 @@ public class RestaurantController {
 
 
 
-    @PostMapping("/create-restaurant")
-    public String createRestaurant(@RequestParam("name") String name,
-                                   @RequestParam("address") String address,
-                                   @RequestParam("location") String location,
-                                   @RequestParam("phone") String phone,
-                                   @RequestParam("type") RestaurantType type,
-                                   @RequestParam("picture") MultipartFile file) {
-        RestaurantEntity restaurant = new RestaurantEntity();
-        restaurant.setName(name);
-        restaurant.setAddress(address);
-        restaurant.setLocation(location);
-        restaurant.setPhone(phone);
-        restaurant.setType(type);
-        try {
-            if (!file.isEmpty()) {
-                String picturePath = fileService.saveFile(file, true);
-                restaurant.setPicturePath(picturePath);
-            }
-            restaurantService.save(restaurant);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "error";
-        }
+    @RequestMapping("/create-restaurant")
+    public String createRestaurant(@ModelAttribute RestaurantEntity restaurant, Model model) {
+        restaurantService.save(restaurant);
         return "redirect:/restaurants";
     }
-
-
 
     @GetMapping("/restaurants")
     public String getAllRestaurants(Model model) {
         model.addAttribute("restaurants", restaurantService.getAll());
         return "restaurants";
     }
-
-
-
-
-
-
-
-
-
-
-
 }

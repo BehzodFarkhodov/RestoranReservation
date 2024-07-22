@@ -9,10 +9,15 @@ import java.util.UUID;
 
 @Repository
 public class RestaurantRepo extends BaseRepo<RestaurantEntity> {
+//    @Transactional
+//    public String save(RestaurantEntity entity) {
+//        manager.persist(entity);
+//        return "saved";
+//    }
     @Transactional
-    public String save(RestaurantEntity entity) {
-        manager.persist(entity);
-        return "saved";
+    public RestaurantEntity save(RestaurantEntity restaurant) {
+        manager.merge(restaurant);
+        return restaurant;
     }
 
     public List<RestaurantEntity> findAll() {
