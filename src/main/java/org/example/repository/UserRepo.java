@@ -11,10 +11,16 @@ import java.util.Optional;
 
 @Repository
 public class UserRepo extends BaseRepo<UserEntity> {
+//    @Transactional
+//    public String save(UserEntity user) {
+//        manager.merge(user);
+//        return "Saved";
+//    }
+
     @Transactional
-    public String save(UserEntity user) {
+    public UserEntity save(UserEntity user) {
         manager.merge(user);
-        return "Saved";
+        return user;
     }
 
 
