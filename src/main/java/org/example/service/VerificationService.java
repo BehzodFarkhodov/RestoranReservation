@@ -51,7 +51,7 @@ public class VerificationService {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-            message.setSubject("Verification Code");
+            message.setSubject("Verifi.cation Code");
             message.setText("Your verification code is: " + code);
             Transport.send(message);
         } catch (MessagingException e) {

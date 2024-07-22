@@ -17,14 +17,15 @@ public class ProductService extends BaseService<ProductEntity, ProductRepo> {
     public ProductEntity createProduct(ProductEntity product) {
         return repository.save(product);
     }
-//    @Transactional
-//    public List<ProductEntity> getProductsByRestaurantId(UUID restaurantId) {
-//        return repository.findAll()
-//                .stream()
-//                .filter(product -> product.getRestaurant().getId().equals(restaurantId))
-//                .collect(Collectors.toList());
-//    }
-//
+    @Transactional
+    public List<ProductEntity> getProductsByRestaurantId(UUID restaurantId) {
+        return repository.findAll()
+                .stream()
+                .filter(product -> product.getRestaurant().getId().equals(restaurantId))
+                .collect(Collectors.toList());
+    }
+
+
 
 
 

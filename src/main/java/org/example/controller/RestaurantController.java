@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 public class RestaurantController {
@@ -28,9 +31,25 @@ public class RestaurantController {
 
 
 
+//    @RequestMapping("/create-restaurant")
+//    public String createRestaurant(@ModelAttribute RestaurantEntity restaurant, Model model) {
+//        restaurantService.save(restaurant);
+//        return "redirect:/restaurants";
+//    }
+
     @RequestMapping("/create-restaurant")
-    public String createRestaurant(@ModelAttribute RestaurantEntity restaurant, Model model) {
-        restaurantService.save(restaurant);
+    public String createRestaurant(@ModelAttribute RestaurantEntity restaurant,
+                                   @RequestParam("picture") MultipartFile file) {
+        try {
+            if (!file.isEmpty()) {
+                String picturePath = fileService.saveFile(file, true);
+                restaurant.setPicturePath(picturePath);
+            }
+            restaurantService.save(restaurant);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error";
+        }
         return "redirect:/restaurants";
     }
 
