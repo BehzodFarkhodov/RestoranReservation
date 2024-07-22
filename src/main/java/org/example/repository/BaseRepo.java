@@ -23,6 +23,9 @@ public class BaseRepo <T extends BaseEntity> {
         return manager.find(type,id);
     }
 
-
+    public T save(T entity){
+        manager.persist(entity);
+        return entity;
+    }
 
 }
