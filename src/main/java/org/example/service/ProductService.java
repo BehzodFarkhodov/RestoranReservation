@@ -1,33 +1,38 @@
 package org.example.service;
 
 import org.example.entity.ProductEntity;
-import org.example.repository.BaseRepo;
-import org.example.repository.ProductRepo;
-import org.springframework.transaction.annotation.Transactional;
+import org.example.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
-public class ProductService extends BaseService<ProductEntity, ProductRepo> {
-    public ProductService(ProductRepo repository) {
+
+@Service
+public class ProductService extends BaseService<ProductEntity, ProductRepository> {
+
+
+
+
+
+
+    public ProductService(ProductRepository repository) {
         super(repository);
     }
-    @Transactional
-    public ProductEntity save(ProductEntity product) {
-        return repository.save(product);
-    }
-    @Transactional
-    public List<ProductEntity> getProductsByRestaurantId(UUID restaurantId) {
-        return repository.findAll()
-                .stream()
-                .filter(product -> product.getRestaurant().getId().equals(restaurantId))
-                .collect(Collectors.toList());
+
+
+    @Autowired
+    private ProductRepository productRepository;
+
+
+    public ProductEntity save(ProductEntity productEntity) {
+        return productRepository.save(productEntity);
     }
 
 
-
-
+    public List<ProductEntity> findAll() {
+        return productRepository.findAll();
+    }
 
 
 }

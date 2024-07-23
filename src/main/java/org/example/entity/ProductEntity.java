@@ -17,8 +17,8 @@ public class ProductEntity extends BaseEntity {
     private String foodName;
     private String foodDescription;
     private double price;
-    private String imagePath;
     private Integer quantity;
+    private String imagePath;
     @ManyToOne
     private RestaurantEntity restaurant;
 }
