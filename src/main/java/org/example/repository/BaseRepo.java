@@ -19,11 +19,13 @@ public class BaseRepo <T extends BaseEntity> {
     public void delete(UUID id){
         manager.remove(id);
     }
+
      @Transactional
     public T findById(UUID id){
         return manager.find(type,id);
     }
 
+    @Transactional
     public T save(T entity){
         manager.persist(entity);
         return entity;
