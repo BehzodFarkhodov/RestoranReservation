@@ -29,7 +29,7 @@
         <c:forEach var="restaurant" items="${restaurants}">
             <div class="col-md-4">
                 <div class="card">
-                    <img src="${pageContext.request.contextPath}/uploads/${restaurant.picturePath}" class="card-img-top" alt="${restaurant.name}">
+                    <img src="${pageContext.request.contextPath}/pictures/${restaurant.picturePath}" class="card-img-top" alt="${restaurant.name}">
                     <div class="card-body">
                         <h5 class="card-title">${restaurant.name}</h5>
                         <p class="card-text">

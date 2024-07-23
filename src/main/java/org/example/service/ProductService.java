@@ -14,7 +14,7 @@ public class ProductService extends BaseService<ProductEntity, ProductRepo> {
         super(repository);
     }
     @Transactional
-    public ProductEntity createProduct(ProductEntity product) {
+    public ProductEntity save(ProductEntity product) {
         return repository.save(product);
     }
     @Transactional
@@ -24,6 +24,7 @@ public class ProductService extends BaseService<ProductEntity, ProductRepo> {
                 .filter(product -> product.getRestaurant().getId().equals(restaurantId))
                 .collect(Collectors.toList());
     }
+
 
 
 

@@ -106,7 +106,6 @@
 <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>--%>
 <%--</body>--%>
 <%--</html>--%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,36 +125,34 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9); /* Oq fon bilan shaffoflik */
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.9);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
         }
-        .header .search-container {
+        .header .logo {
+            height: 50px;
+            margin-right: 20px;
+        }
+        .search-container {
             display: flex;
             align-items: center;
-            width: 60%;
-        }
-        .header .search-container label {
-            margin-right: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #f7b600;
-        }
-        .header .search-container .input-group {
             flex-grow: 1;
+            max-width: 500px; /* Adjusted maximum width */
         }
-        .header .search-container .input-group input {
+        .search-container input {
+            flex-grow: 1;
+            max-width: 400px; /* Adjusted maximum width */
             border-radius: 25px 0 0 25px;
             border: 2px solid #f7b600;
             padding: 10px 20px;
             font-weight: bold;
             font-size: 16px;
         }
-        .header .search-container .input-group button {
+        .search-container button {
             border-radius: 0 25px 25px 0;
             background-color: #f7b600;
             color: #ffffff;
@@ -163,16 +160,17 @@
             cursor: pointer;
             font-weight: bold;
             font-size: 16px;
+            padding: 10px 20px;
         }
-        .header .search-container .input-group button:hover {
+        .search-container button:hover {
             background-color: #d19e00;
         }
-        .header .registration-buttons {
+        .registration-buttons {
             display: flex;
             gap: 10px;
-            margin-right: 20px; /* O'ng tomondan bo'shliq qo'shish */
+            margin-left: 20px; /* Move buttons slightly to the left */
         }
-        .header .registration-button {
+        .registration-button {
             padding: 10px 20px;
             border-radius: 25px;
             background-color: #f7b600;
@@ -183,28 +181,26 @@
             font-weight: bold;
             font-size: 16px;
         }
-        .header .registration-button:hover {
+        .registration-button:hover {
             background-color: #d19e00;
         }
-        .header .logo {
-            height: 50px;
-            margin-right: 20px;
-        }
         .content {
-            padding-top: 100px; /* Qattiq xuddi header ostida bo'shliq uchun */
+            padding-top: 100px;
             margin: 20px;
         }
         .card-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            margin: 0 auto;
+            max-width: 1400px; /* Reduced maximum width for the container */
         }
         .card {
-            background-color: #f7b600;
+            background-color: #ffffff;
             border-radius: 15px;
             overflow: hidden;
             margin-bottom: 20px;
-            width: 30%;
+            width: 31%; /* Increased card width */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
         }
@@ -225,26 +221,28 @@
             font-weight: bold;
             font-size: 16px;
             display: inline-block;
-            width: 100%;
-            padding: 10px;
+            padding: 10px 20px;
             text-align: center;
             color: #ffffff;
             background-color: #f7b600;
             border: none;
+            margin: 5px; /* Adjust margin for spacing between buttons */
         }
         .btn-custom:hover {
             background-color: #d19e00;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px; /* Adjust gap between buttons */
         }
     </style>
 </head>
 <body>
 <div class="header">
     <div class="search-container">
-        <label for="search-input">Search food, restaurant or brand</label>
-        <div class="input-group">
-            <input type="text" id="search-input" class="form-control" placeholder="Search...">
-            <button type="button" class="btn">Search</button>
-        </div>
+        <input type="text" id="search-input" class="form-control" placeholder="Search food, restaurant or brand">
+        <button type="button" class="btn">Search</button>
     </div>
     <div class="registration-buttons">
         <a href="${pageContext.request.contextPath}/register" class="registration-button">Register</a>
@@ -256,7 +254,7 @@
     <div class="card-container">
         <c:forEach var="restaurant" items="${restaurants}">
             <div class="card">
-                <img src="${pageContext.request.contextPath}/uploads/${restaurant.picturePath}" class="card-img-top" alt="${restaurant.name}">
+                <img src="${pageContext.request.contextPath}/pictures/${restaurant.picturePath}" class="card-img-top" alt="${restaurant.name}">
                 <div class="card-body">
                     <h5 class="card-title">${restaurant.name}</h5>
                     <p class="card-text">
@@ -265,8 +263,10 @@
                         <strong>Phone:</strong> ${restaurant.phone}<br>
                         <strong>Type:</strong> ${restaurant.type}
                     </p>
-                    <a href="view-restaurant?id=${restaurant.id}" class="btn btn-custom">See Restaurant</a>
-                    <a href="book-restaurant?id=${restaurant.id}" class="btn btn-custom">Booking Table</a>
+                    <div class="button-container">
+                        <a href="view-restaurant?id=${restaurant.id}" class="btn btn-custom">See Restaurant</a>
+                        <a href="book-restaurant?id=${restaurant.id}" class="btn btn-custom">Booking Table</a>
+                    </div>
                 </div>
             </div>
         </c:forEach>
