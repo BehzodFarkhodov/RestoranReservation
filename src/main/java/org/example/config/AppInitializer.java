@@ -4,7 +4,7 @@ import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletRegistration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class    AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
 //        String[] strings = {"asds", "asda", "asasd"};
@@ -26,4 +26,6 @@ public class    AppInitializer extends AbstractAnnotationConfigDispatcherServlet
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement("");
         registration.setMultipartConfig(multipartConfigElement);
     }
+
+    
 }

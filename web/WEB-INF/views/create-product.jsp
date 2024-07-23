@@ -29,7 +29,7 @@
 
         <div class="form-group">
             <label for="imagePath">imagePath</label>
-            <input type="file" id="imagePath" name="imagePath" class="form-control-file" accept="image/jpeg" required />
+            <input type="file" id="imagePath" name="imagePath" class="form-control-file" required />
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>

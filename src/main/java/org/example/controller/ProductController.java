@@ -4,6 +4,7 @@ import org.example.entity.ProductEntity;
 import org.example.service.FileService;
 import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,9 +28,9 @@ public class ProductController {
         return "create-product";
     }
 
-    @RequestMapping(value = "/create-product", method = RequestMethod.POST)
+    @RequestMapping(value = "/create-product", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public String create(@ModelAttribute ProductEntity product,
-                         @RequestParam("picture") MultipartFile file) {
+                         @RequestParam("imagePath") MultipartFile file) {
 
         try {
             if (!file.isEmpty()) {
