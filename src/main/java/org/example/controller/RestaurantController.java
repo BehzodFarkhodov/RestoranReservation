@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class RestaurantController {
@@ -19,7 +20,7 @@ public class RestaurantController {
     @Autowired
     private FileService fileService;
 
-    @GetMapping("/create-restaurant")
+    @GetMapping(value = "/create-restaurant")
     public String showCreateRestaurantForm(Model model) {
         model.addAttribute("restaurant", new RestaurantEntity());
         RestaurantType[] types = RestaurantType.values();
@@ -35,7 +36,7 @@ public class RestaurantController {
 //        return "redirect:/restaurants";
 //    }
 
-    @RequestMapping("/create-restaurant")
+    @RequestMapping(value = "/create-restaurant",method = RequestMethod.POST)
     public String createRestaurant(@ModelAttribute RestaurantEntity restaurant,
                                    @RequestParam("picture") MultipartFile file) {
         try {
@@ -55,4 +56,15 @@ public class RestaurantController {
         model.addAttribute("restaurants", restaurantService.getAll());
         return "restaurants";
     }
+
+    @GetMapping("/search")
+    public String searchRestaurants(@RequestParam(value = "location", required = false) String location,
+                                    @RequestParam(value = "name", required = false) String name,
+                                    @RequestParam(value = "address", required = false) String address,
+                                    Model model) {
+        List<RestaurantEntity> restaurants = restaurantService.searchRestaurants(location, name, address);
+        model.addAttribute("restaurants", restaurants);
+        return "main";
+    }
+
 }
