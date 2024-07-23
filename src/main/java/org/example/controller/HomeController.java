@@ -15,6 +15,7 @@ import java.util.List;
 public class HomeController {
     @Autowired
     private RestaurantService restaurantService;
+
     @RequestMapping("/")
     public String start(Model model) {
         List<RestaurantEntity> restaurants = restaurantService.getAll();

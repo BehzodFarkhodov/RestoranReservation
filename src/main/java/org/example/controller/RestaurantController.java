@@ -45,7 +45,6 @@ public class RestaurantController {
             }
             restaurantService.save(restaurant);
         } catch (IOException e) {
-            e.printStackTrace();
             return "error";
         }
         return "redirect:/restaurants";
