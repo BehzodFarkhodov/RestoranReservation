@@ -127,7 +127,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9); /* White background with opacity */
+            background-color: rgba(255, 255, 255, 0.9); /* Oq fon bilan shaffoflik */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
@@ -170,6 +170,7 @@
         .header .registration-buttons {
             display: flex;
             gap: 10px;
+            margin-right: 20px; /* O'ng tomondan bo'shliq qo'shish */
         }
         .header .registration-button {
             padding: 10px 20px;
@@ -190,7 +191,8 @@
             margin-right: 20px;
         }
         .content {
-            padding-top: 100px; /* For spacing below the fixed header */
+            padding-top: 100px; /* Qattiq xuddi header ostida bo'shliq uchun */
+            margin: 20px;
         }
         .card-container {
             display: flex;
@@ -218,12 +220,20 @@
             padding: 15px;
             text-align: center;
         }
-        .btn-primary, .btn-secondary {
+        .btn-custom {
             border-radius: 25px;
             font-weight: bold;
             font-size: 16px;
-            margin-right: 10px;
-            margin-top: 10px;
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            color: #ffffff;
+            background-color: #f7b600;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #d19e00;
         }
     </style>
 </head>
@@ -255,8 +265,8 @@
                         <strong>Phone:</strong> ${restaurant.phone}<br>
                         <strong>Type:</strong> ${restaurant.type}
                     </p>
-                    <a href="view-restaurant?id=${restaurant.id}" class="btn btn-primary">View Details</a>
-                    <a href="book-restaurant?id=${restaurant.id}" class="btn btn-secondary">Book a Table</a>
+                    <a href="view-restaurant?id=${restaurant.id}" class="btn btn-custom">See Restaurant</a>
+                    <a href="book-restaurant?id=${restaurant.id}" class="btn btn-custom">Booking Table</a>
                 </div>
             </div>
         </c:forEach>
@@ -267,3 +277,4 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
