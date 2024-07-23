@@ -1,11 +1,9 @@
 package org.example.controller;
 
-import jakarta.servlet.http.Part;
 import org.example.entity.RestaurantEntity;
 import org.example.enumertaror.RestaurantType;
 import org.example.service.FileService;
 import org.example.service.RestaurantService;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
