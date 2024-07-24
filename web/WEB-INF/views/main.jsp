@@ -244,8 +244,10 @@
         .registration-buttons {
             display: flex;
             gap: 10px;
-            margin-left: 20px;
+            margin-right: 20px; /* Pushes the buttons to the right */
+            margin-left: 0; /* Resets the left margin */
         }
+
         .registration-button {
             padding: 10px 20px;
             border-radius: 25px;
@@ -257,6 +259,7 @@
             font-weight: bold;
             font-size: 16px;
         }
+
         .registration-button:hover {
             background-color: #d19e00;
         }

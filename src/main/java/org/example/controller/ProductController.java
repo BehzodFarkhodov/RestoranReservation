@@ -74,4 +74,14 @@ public String create(@ModelAttribute ProductEntity product,
 
 
 
+
+    @GetMapping("/view-restaurant")
+    public String viewRestaurantProducts(@RequestParam("id") UUID id, Model model) {
+        List<ProductEntity> products = productService.getProductsByRestaurant(id);
+        model.addAttribute("products", products);
+        return "products";
+    }
+
+
+
 }
