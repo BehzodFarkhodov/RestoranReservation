@@ -39,7 +39,7 @@
         </div>
         <div class="form-group">
             <label for="picture">Picture</label>
-            <input type="file" id="picture" name="picturePath" class="form-control-file" required />
+            <input type="file" id="picture" name="picture" class="form-control-file" required />
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>

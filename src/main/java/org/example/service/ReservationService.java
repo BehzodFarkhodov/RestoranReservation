@@ -10,9 +10,10 @@ public class ReservationService extends BaseService<ReservationEntity, Reservati
         super(repository);
     }
     @Transactional
-    public ReservationEntity createReservation(ReservationEntity reservation) {
+    public ReservationEntity save(ReservationEntity reservation) {
         return repository.save(reservation);
     }
+
 
 
 }
