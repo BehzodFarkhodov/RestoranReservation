@@ -47,31 +47,31 @@ public class UserController {
     }
 
 
-//    @RequestMapping(value = "login", method = RequestMethod.POST)
-//    public String login(@ModelAttribute UserEntity user, HttpSession session) {
-//        UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
-//
-//        if (loggedInUser != null && user.getEmail().equals("muxammadaminartikov@gmail.com")) {
-//
-//            session.setAttribute("userId", loggedInUser.getId());
-//            return "admin-main-menu";
-//        } else {
-//            return "main";
-//        }
-//    }
-
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@ModelAttribute UserEntity user, HttpSession session) {
         UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
 
-        if (loggedInUser != null && loggedInUser.getEmail().equals("behzodfarhodov13@gmail.com")) {
+        if (loggedInUser != null && user.getEmail().equals("muxammadaminartikov@gmail.com") || user.getEmail().equals("behzodfarhodov13@gmail.com")) {
+
             session.setAttribute("userId", loggedInUser.getId());
-            return "create-restaurant";
+            return "admin-main-menu";
         } else {
-            session.setAttribute("user", loggedInUser);
             return "main";
         }
     }
+
+//    @RequestMapping(value = "login", method = RequestMethod.POST)
+//    public String login(@ModelAttribute UserEntity user, HttpSession session) {
+//        UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
+//
+//        if (loggedInUser != null && loggedInUser.getEmail().equals("behzodfarhodov13@gmail.com")) {
+//            session.setAttribute("userId", loggedInUser.getId());
+//            return "create-restaurant";
+//        } else {
+//            session.setAttribute("user", loggedInUser);
+//            return "main";
+//        }
+//    }
 
 
     @RequestMapping("/update-profile")
