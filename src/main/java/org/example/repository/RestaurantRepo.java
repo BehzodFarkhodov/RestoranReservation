@@ -1,5 +1,6 @@
 package org.example.repository;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.TypedQuery;
 import org.example.entity.RestaurantEntity;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,12 @@ import java.util.List;
 
 @Repository
 public class RestaurantRepo extends BaseRepo<RestaurantEntity> {
+
+
+    @PostConstruct
+    private void init() {
+        this.type = RestaurantEntity.class;
+    }
 //    @Transactional
 //    public String save(RestaurantEntity entity) {
 //        manager.persist(entity);

@@ -17,7 +17,7 @@ public class BaseRepo <T extends BaseEntity> {
 
     @Transactional
     public void delete(UUID id){
-        manager.remove(id);
+    manager.remove(manager.find(type, id));
     }
 
      @Transactional
