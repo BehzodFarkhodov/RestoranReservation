@@ -23,9 +23,6 @@ public class ReservationEntity extends BaseEntity {
     private Integer numberOfPeople;
     private String status;
     private String phoneNumber;
-
-
-
 }
 
 
