@@ -36,7 +36,7 @@ public class RestaurantController {
 //        return "redirect:/restaurants";
 //    }
 
-    @RequestMapping(value = "/create-restaurant",method = RequestMethod.POST)
+    @PostMapping(value = "/create-restaurant")
     public String createRestaurant(@ModelAttribute RestaurantEntity restaurant,
                                    @RequestParam("picture") MultipartFile file) {
         try {
@@ -51,13 +51,13 @@ public class RestaurantController {
         return "redirect:/restaurants";
     }
 
-    @GetMapping("/restaurants")
+    @RequestMapping("/restaurants")
     public String getAllRestaurants(Model model) {
         model.addAttribute("restaurants", restaurantService.getAll());
         return "restaurants";
     }
 
-    @GetMapping("/search")
+    @RequestMapping("/search")
     public String searchRestaurants(@RequestParam(value = "location", required = false) String location,
                                     @RequestParam(value = "name", required = false) String name,
                                     @RequestParam(value = "address", required = false) String address,
