@@ -11,11 +11,7 @@ import java.util.Optional;
 
 @Repository
 public class UserRepo extends BaseRepo<UserEntity> {
-//    @Transactional
-//    public String save(UserEntity user) {
-//        manager.merge(user);
-//        return "Saved";
-//    }
+
 
     @Transactional
     public UserEntity save(UserEntity user) {
@@ -26,7 +22,7 @@ public class UserRepo extends BaseRepo<UserEntity> {
 
     @Transactional
     public Optional<UserEntity> signIn(String email, String password) {
-        UserEntity user = manager.createQuery("select u from  UserEntity  u  where u.email = :email and u.password = :password", UserEntity.class).
+        UserEntity user = (UserEntity) manager.createQuery("select u from  UserEntity  u  where u.email = :email and u.password = :password", UserEntity.class).
                 setParameter("email", email)
                 .setParameter("password", password)
                 .getSingleResult();
@@ -49,6 +45,10 @@ public class UserRepo extends BaseRepo<UserEntity> {
         }
         return Optional.of(user);
     }
+
+
+
+
 
 
 

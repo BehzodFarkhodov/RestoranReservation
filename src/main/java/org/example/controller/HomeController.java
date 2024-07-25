@@ -19,7 +19,7 @@ public class HomeController {
     @RequestMapping("/")
     public String start(Model model) {
         List<RestaurantEntity> restaurants = restaurantService.getAll();
-        model.addAttribute("restaurants", restaurants); // Add the restaurants to the model
+        model.addAttribute("restaurants", restaurants);
         return "main";
     }
 }
