@@ -2,12 +2,14 @@ package org.example.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.example.entity.OrderEntity;
 import org.example.entity.UserEntity;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -70,6 +72,13 @@ public class UserController {
 //            return "main";
 //        }
 //    }
+
+    @RequestMapping("/update-profile")
+    public String updateProfile(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email, HttpSession session) {
+        List<OrderEntity> userOrders = userService.updateProfile(username, password, email);
+        session.setAttribute("orders", userOrders);
+        return "main";
+    }
 
 
 }
