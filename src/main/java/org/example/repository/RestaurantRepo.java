@@ -22,11 +22,20 @@ public class RestaurantRepo extends BaseRepo<RestaurantEntity> {
 //        manager.persist(entity);
 //        return "saved";
 //    }
-    @Transactional
-    public RestaurantEntity save(RestaurantEntity restaurant) {
+//    @Transactional
+//    public RestaurantEntity save(RestaurantEntity restaurant) {
+//        manager.persist(restaurant);
+//        return restaurant;
+//    }
+@Transactional
+public RestaurantEntity save(RestaurantEntity restaurant) {
+    if (restaurant.getId() == null) {
+        manager.persist(restaurant);
+    } else {
         manager.merge(restaurant);
-        return restaurant;
     }
+    return restaurant;
+}
 
     public List<RestaurantEntity> findAll() {
         return manager.createQuery("from RestaurantEntity", RestaurantEntity.class).getResultList();
