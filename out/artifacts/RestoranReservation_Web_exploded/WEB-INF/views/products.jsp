@@ -165,7 +165,7 @@
                                 <strong>Price:</strong> ${product.price}<br>
                                 <strong>Description:</strong> ${product.foodDescription}
                             </p>
-                            <a href="orderProduct?productId=${product.id}" class="btn-custom">Order</a>
+                            <a href="${pageContext.request.contextPath}/save-order?productId=${product.id}" class="btn-custom">Order</a>
                         </div>
                     </div>
                 </c:forEach>
