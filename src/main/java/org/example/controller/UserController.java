@@ -52,11 +52,13 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@ModelAttribute UserEntity user, HttpSession session) {
         UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
+        System.out.println(loggedInUser);
 
         if (loggedInUser != null && loggedInUser.getEmail().equals("behzodfarhodov13@gmail.com")) {
             session.setAttribute("userId", loggedInUser.getId());
             return "admin-main-menu";
         } else {
+            session.setAttribute("user", loggedInUser);
             return "main";
         }
     }
@@ -77,6 +79,19 @@ public class UserController {
     public String updateProfile(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email, HttpSession session) {
         List<OrderEntity> userOrders = userService.updateProfile(username, password, email);
         session.setAttribute("orders", userOrders);
+        return "main";
+    }
+
+    @RequestMapping("/user-menu")
+    public String showUserMenu() {
+        return "user-menu";
+    }
+
+    @RequestMapping("/update-balance")
+    public String updateBalance(@RequestParam("adjustBalance") double balance, HttpSession session) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        user.setBalance(balance);
+        userService.save(user);
         return "main";
     }
 

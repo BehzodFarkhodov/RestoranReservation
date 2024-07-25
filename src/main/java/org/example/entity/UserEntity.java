@@ -20,4 +20,15 @@ public class UserEntity extends BaseEntity {
     private String email;
     private UserRole role;
     private double balance;
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                ", balance=" + balance +
+                '}';
+    }
 }
