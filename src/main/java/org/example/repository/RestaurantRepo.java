@@ -1,16 +1,22 @@
 package org.example.repository;
 
-import org.example.entity.ProductEntity;
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.TypedQuery;
 import org.example.entity.RestaurantEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.util.List;
-import java.util.UUID;
-@ApplicationScope
+
+
 @Repository
 public class RestaurantRepo extends BaseRepo<RestaurantEntity> {
+
+
+    @PostConstruct
+    private void init() {
+        this.type = RestaurantEntity.class;
+    }
 //    @Transactional
 //    public String save(RestaurantEntity entity) {
 //        manager.persist(entity);
@@ -26,15 +32,37 @@ public class RestaurantRepo extends BaseRepo<RestaurantEntity> {
         return manager.createQuery("from RestaurantEntity", RestaurantEntity.class).getResultList();
     }
 
-
-
     @Transactional
-    public List<RestaurantEntity> filterByName(String name) {
-        List<RestaurantEntity> resultList = manager.createQuery("from RestaurantEntity r where r.name ilike :name", RestaurantEntity.class)
-                .setParameter("name", "%" + name + "%")
-                .getResultList();
-        return resultList;
+    public List<RestaurantEntity> findByFilters(String location, String name, String address) {
+        StringBuilder queryStr = new StringBuilder("SELECT r FROM RestaurantEntity r WHERE 1=1");
+        if (location != null && !location.isEmpty()) {
+            queryStr.append(" AND LOWER(r.location) LIKE :location");
+        }
+        if (name != null && !name.isEmpty()) {
+            queryStr.append(" AND LOWER(r.name) LIKE :name");
+        }
+        if (address != null && !address.isEmpty()) {
+            queryStr.append(" AND LOWER(r.address) LIKE :address");
+        }
+
+        TypedQuery<RestaurantEntity> query = manager.createQuery(queryStr.toString(), RestaurantEntity.class);
+
+        if (location != null && !location.isEmpty()) {
+            query.setParameter("location", "%" + location.toLowerCase() + "%");
+        }
+        if (name != null && !name.isEmpty()) {
+            query.setParameter("name", "%" + name.toLowerCase() + "%");
+        }
+        if (address != null && !address.isEmpty()) {
+            query.setParameter("address", "%" + address.toLowerCase() + "%");
+        }
+
+        return query.getResultList();
     }
+
+
+
+
 
 
 

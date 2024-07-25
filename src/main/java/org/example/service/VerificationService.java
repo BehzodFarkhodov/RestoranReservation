@@ -1,17 +1,17 @@
 package org.example.service;
 
-import lombok.Setter;
-import org.example.entity.UserEntity;
+
+
 import org.example.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
-import javax.mail.internet.AddressException;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.Optional;
+
 import java.util.Properties;
 @Service
 public class VerificationService {
@@ -51,7 +51,7 @@ public class VerificationService {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-            message.setSubject("Verification Code");
+            message.setSubject("Verifi.cation Code");
             message.setText("Your verification code is: " + code);
             Transport.send(message);
         } catch (MessagingException e) {

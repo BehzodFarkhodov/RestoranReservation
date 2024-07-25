@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
-import java.util.UUID;
+
 
 @Controller
 @AllArgsConstructor
@@ -45,14 +45,31 @@ public class UserController {
         return "login";
     }
 
+
+
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@ModelAttribute UserEntity user, HttpSession session) {
-        userService.login(user.getEmail(), user.getPassword());
-        session.setAttribute("userId", UUID.randomUUID());
-        return "create-restaurant";
+        UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
+
+        if (loggedInUser != null && loggedInUser.getEmail().equals("behzodfarhodov13@gmail.com")) {
+            session.setAttribute("userId", loggedInUser.getId());
+            return "admin-main-menu";
+        } else {
+            return "main";
+        }
     }
 
-
+//    @RequestMapping(value = "login", method = RequestMethod.POST)
+//    public String login(@ModelAttribute UserEntity user, HttpSession session) {
+//        UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
+//
+//        if (loggedInUser != null && loggedInUser.getEmail().equals("behzodfarhodov13@gmail.com")) {
+//            session.setAttribute("userId", loggedInUser.getId());
+//            return "create-restaurant";
+//        } else {
+//            return "main";
+//        }
+//    }
 
 
 }

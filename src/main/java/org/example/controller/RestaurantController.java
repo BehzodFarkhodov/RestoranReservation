@@ -1,15 +1,17 @@
 package org.example.controller;
 
-import jakarta.servlet.http.Part;
 import org.example.entity.RestaurantEntity;
 import org.example.enumertaror.RestaurantType;
 import org.example.service.FileService;
 import org.example.service.RestaurantService;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class RestaurantController {
@@ -18,7 +20,7 @@ public class RestaurantController {
     @Autowired
     private FileService fileService;
 
-    @GetMapping("/create-restaurant")
+    @GetMapping(value = "/create-restaurant")
     public String showCreateRestaurantForm(Model model) {
         model.addAttribute("restaurant", new RestaurantEntity());
         RestaurantType[] types = RestaurantType.values();
@@ -28,9 +30,24 @@ public class RestaurantController {
 
 
 
-    @RequestMapping("/create-restaurant")
-    public String createRestaurant(@ModelAttribute RestaurantEntity restaurant, Model model) {
-        restaurantService.save(restaurant);
+//    @RequestMapping("/create-restaurant")
+//    public String createRestaurant(@ModelAttribute RestaurantEntity restaurant, Model model) {
+//        restaurantService.save(restaurant);
+//        return "redirect:/restaurants";
+//    }
+
+    @RequestMapping(value = "/create-restaurant",method = RequestMethod.POST)
+    public String createRestaurant(@ModelAttribute RestaurantEntity restaurant,
+                                   @RequestParam("picture") MultipartFile file) {
+        try {
+            if (!file.isEmpty()) {
+                String picturePath = fileService.saveFile(file, true);
+                restaurant.setPicturePath(picturePath);
+            }
+            restaurantService.save(restaurant);
+        } catch (IOException e) {
+            return "error";
+        }
         return "redirect:/restaurants";
     }
 
@@ -39,4 +56,15 @@ public class RestaurantController {
         model.addAttribute("restaurants", restaurantService.getAll());
         return "restaurants";
     }
+
+    @GetMapping("/search")
+    public String searchRestaurants(@RequestParam(value = "location", required = false) String location,
+                                    @RequestParam(value = "name", required = false) String name,
+                                    @RequestParam(value = "address", required = false) String address,
+                                    Model model) {
+        List<RestaurantEntity> restaurants = restaurantService.searchRestaurants(location, name, address);
+        model.addAttribute("restaurants", restaurants);
+        return "main";
+    }
+
 }
