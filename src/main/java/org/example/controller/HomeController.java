@@ -22,4 +22,6 @@ public class HomeController {
         model.addAttribute("restaurants", restaurants); // Add the restaurants to the model
         return "main";
     }
+
+    //jdbjkdbj
 }
