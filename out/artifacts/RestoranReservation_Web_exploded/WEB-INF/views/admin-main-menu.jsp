@@ -12,8 +12,8 @@
 </head>
 <body>
 
-<button><a href="${pageContext.request.contextPath}/create-restaurant">Add Restaurant</a></button>
-<button><a href="${pageContext.request.contextPath}/create-product">Add Product</a></button>
+<button><a href="create-restaurant">Add Restaurant</a></button>
+<button><a href="create-product">Add Product</a></button>
 
 </body>
 </html>

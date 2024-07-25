@@ -19,5 +19,5 @@ public class UserEntity extends BaseEntity {
     private String password;
     private String email;
     private UserRole role;
-    private Double balance;
+    private double balance;
 }
