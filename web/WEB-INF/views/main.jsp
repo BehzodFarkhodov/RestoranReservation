@@ -330,6 +330,7 @@
     <div class="registration-buttons">
         <a href="${pageContext.request.contextPath}/register" class="registration-button">Register</a>
         <a href="${pageContext.request.contextPath}/login" class="registration-button">Log In</a>
+        <a href="${pageContext.request.contextPath}/user-menu" class="registration-button">My Profile</a>
     </div>
 </div>
 
