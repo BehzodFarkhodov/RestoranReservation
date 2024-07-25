@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class UserRepo extends BaseRepo<UserEntity> {
@@ -34,6 +35,7 @@ public class UserRepo extends BaseRepo<UserEntity> {
 
     }
 
+
     @Transactional
     public Optional<UserEntity> findByEmail(String email) {
         UserEntity user = manager.createQuery("select u from UserEntity u where u.email = :email", UserEntity.class)
@@ -47,10 +49,24 @@ public class UserRepo extends BaseRepo<UserEntity> {
     }
 
 
+    @Transactional
+    public UserEntity findById(UUID id) {
+        return manager.createQuery("select  u from UserEntity  u where u.id = :id", UserEntity.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 
 
-
-
+    @Transactional
+    public double balance(UUID id, double amount) {
+        UserEntity user = findById(id);
+        if (user.getBalance() >= amount) {
+            user.setBalance(user.getBalance() - amount);
+            manager.merge(user);
+            return user.getBalance();
+        }
+        return 0;
+    }
 
 
 }
