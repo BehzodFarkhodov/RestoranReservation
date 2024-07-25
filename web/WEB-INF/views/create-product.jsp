@@ -50,26 +50,25 @@
 <div class="container mt-5">
     <h2>Create Product</h2>
     <form action="${pageContext.request.contextPath}/create-product" method="post" enctype="multipart/form-data">
-        <!-- Product Details -->
         <div class="form-group">
             <label for="foodName">Food Name</label>
-            <input type="text" id="foodName" name="foodName" class="form-control" required />
+            <input type="text" id="foodName" name="foodName" class="form-control" required/>
         </div>
         <div class="form-group">
             <label for="foodDescription">Food Description</label>
-            <input type="text" id="foodDescription" name="foodDescription" class="form-control" required />
+            <input type="text" id="foodDescription" name="foodDescription" class="form-control" required/>
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="number" id="price" name="price" class="form-control" required />
+            <input type="number" id="price" name="price" class="form-control" required/>
         </div>
         <div class="form-group">
             <label for="quantity">Quantity</label>
-            <input type="number" id="quantity" name="quantity" class="form-control" required />
+            <input type="number" id="quantity" name="quantity" class="form-control" required/>
         </div>
         <div class="form-group">
             <label for="imagePath">Image</label>
-            <input type="file" id="imagePath" name="imageFile" class="form-control-file" required />
+            <input type="file" id="imagePath" name="imageFile" class="form-control-file" required/>
         </div>
 
         <div class="form-group">

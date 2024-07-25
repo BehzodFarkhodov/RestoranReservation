@@ -53,4 +53,9 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
         Optional<UserEntity> userEntity = repository.signIn(email, password);
         return userEntity.orElseThrow(() -> new RuntimeException("user not found "));
     }
+
+
+    public double balance(UUID id, double amount) {
+        return repository.balance(id, amount);
+    }
 }
