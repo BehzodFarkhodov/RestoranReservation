@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.entity.OrderEntity;
 
 import org.example.entity.ProductEntity;
+import org.example.entity.UserEntity;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
 import org.example.service.UserService;
