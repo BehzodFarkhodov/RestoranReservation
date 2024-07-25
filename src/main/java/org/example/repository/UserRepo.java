@@ -1,11 +1,13 @@
 package org.example.repository;
 
 
+import org.example.entity.OrderEntity;
 import org.example.entity.UserEntity;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -67,6 +69,17 @@ public class UserRepo extends BaseRepo<UserEntity> {
         }
         return 0;
     }
+
+    public List<OrderEntity> getOrders(String email) {
+        Optional<UserEntity> user = findByEmail(email);
+        if (user.isPresent()) {
+            return manager.createQuery("SELECT o FROM OrderEntity o WHERE o.user = :user", OrderEntity.class)
+                    .setParameter("user", user.get())
+                    .getResultList();
+        }
+        return null;
+    }
+
 
 
 }
