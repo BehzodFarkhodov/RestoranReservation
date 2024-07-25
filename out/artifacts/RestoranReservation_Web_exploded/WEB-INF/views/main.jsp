@@ -330,6 +330,7 @@
     <div class="registration-buttons">
         <a href="${pageContext.request.contextPath}/register" class="registration-button">Register</a>
         <a href="${pageContext.request.contextPath}/login" class="registration-button">Log In</a>
+        <a href="${pageContext.request.contextPath}/user-menu" class="registration-button">My Profile</a>
     </div>
 </div>
 
@@ -348,7 +349,7 @@
                     </p>
                     <div class="button-container">
                         <a href="view-restaurant?id=${restaurant.id}" class="btn btn-custom">See Restaurant</a>
-                        <a href="book-restaurant?id=${restaurant.id}" class="btn btn-custom">Booking Table</a>
+                        <a href="booking-table?id=${restaurant.id}" class="btn btn-custom">Booking Table</a>
                     </div>
                 </div>
             </div>
