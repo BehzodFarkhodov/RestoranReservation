@@ -12,19 +12,19 @@
     <form action="${pageContext.request.contextPath}/create-restaurant" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" class="form-control" required />
+            <input type="text" id="name" name="name" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="address">Address</label>
-            <input type="text" id="address" name="address" class="form-control" required />
+            <input type="text" id="address" name="address" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="location">Location</label>
-            <input type="text" id="location" name="location" class="form-control" required />
+            <input type="text" id="location" name="location" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" id="phone" name="phone" class="form-control" required />
+            <input type="text" id="phone" name="phone" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="type">Type</label>
@@ -44,7 +44,7 @@
         </div>
         <div class="form-group">
             <label for="picture">Picture</label>
-            <input type="file" id="picture" name="picture"  class="form-control-file" />
+            <input type="file" id="picture" name="picture"  class="form-control-file">
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>

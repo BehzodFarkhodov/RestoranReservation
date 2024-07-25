@@ -24,4 +24,8 @@ public class RestaurantService extends BaseService<RestaurantEntity, RestaurantR
        return repository.findAll();
    }
 
+   public List<RestaurantEntity> filter(String name) {
+       return repository.filterByName(name);
+   }
+
 }
