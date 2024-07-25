@@ -13,7 +13,6 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
     @Autowired
     private VerificationService verificationService;
     @Autowired
-
     private UserRepo userRepo;
 
     public UserService(UserRepo repository) {
