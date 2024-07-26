@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.example.entity.OrderEntity;
 import org.example.entity.UserEntity;
-import org.example.service.OrderService;
 import org.example.service.RestaurantService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
