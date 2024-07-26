@@ -15,7 +15,6 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
     @Autowired
     private VerificationService verificationService;
     @Autowired
-
     private UserRepo userRepo;
 
     public UserService(UserRepo repository) {
@@ -55,6 +54,11 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
     public UserEntity login(String email, String password) {
         Optional<UserEntity> userEntity = repository.signIn(email, password);
         return userEntity.orElseThrow(() -> new RuntimeException("user not found "));
+    }
+
+
+    public double balance(UUID id, double amount) {
+        return repository.balance(id, amount);
     }
 
     public List<OrderEntity> updateProfile(String username, String password, String email) {

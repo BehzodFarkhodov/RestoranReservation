@@ -39,15 +39,18 @@ public class RestaurantController {
     @RequestMapping(value = "/create-restaurant",method = RequestMethod.POST)
     public String createRestaurant(@ModelAttribute RestaurantEntity restaurant,
                                    @RequestParam("picture") MultipartFile file) {
-        try {
+
             if (!file.isEmpty()) {
-                String picturePath = fileService.saveFile(file, true);
+                String picturePath = null;
+                try {
+                    picturePath = fileService.saveFile(file, true);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 restaurant.setPicturePath(picturePath);
             }
             restaurantService.save(restaurant);
-        } catch (IOException e) {
-            return "error";
-        }
+
         return "redirect:/restaurants";
     }
 
@@ -66,5 +69,7 @@ public class RestaurantController {
         model.addAttribute("restaurants", restaurants);
         return "main";
     }
+
+
 
 }

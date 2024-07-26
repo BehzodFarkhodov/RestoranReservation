@@ -10,14 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class UserRepo extends BaseRepo<UserEntity> {
-//    @Transactional
-//    public String save(UserEntity user) {
-//        manager.merge(user);
-//        return "Saved";
-//    }
+
 
     @Transactional
     public UserEntity save(UserEntity user) {
@@ -28,12 +25,16 @@ public class UserRepo extends BaseRepo<UserEntity> {
 
     @Transactional
     public Optional<UserEntity> signIn(String email, String password) {
-        List<UserEntity> users = manager.createQuery("SELECT u FROM UserEntity u WHERE u.email = :email AND u.password = :password", UserEntity.class)
-                .setParameter("email", email)
+        UserEntity user = (UserEntity) manager.createQuery("select u from  UserEntity  u  where u.email = :email and u.password = :password", UserEntity.class).
+                setParameter("email", email)
                 .setParameter("password", password)
-                .getResultList();
+                .getSingleResult();
 
-        return users.isEmpty() ? Optional.empty() : Optional.of(users.get(0));
+        if (Objects.isNull(user)) {
+            return Optional.empty();
+        }
+        return Optional.of(user);
+
     }
 
 
@@ -50,13 +51,35 @@ public class UserRepo extends BaseRepo<UserEntity> {
     }
 
 
+    @Transactional
+    public UserEntity findById(UUID id) {
+        return manager.createQuery("select  u from UserEntity  u where u.id = :id", UserEntity.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+
+    @Transactional
+    public double balance(UUID id, double amount) {
+        UserEntity user = findById(id);
+        if (user.getBalance() >= amount) {
+            user.setBalance(user.getBalance() - amount);
+            manager.merge(user);
+            return user.getBalance();
+        }
+        return 0;
+    }
+
     public List<OrderEntity> getOrders(String email) {
         Optional<UserEntity> user = findByEmail(email);
         if (user.isPresent()) {
             return manager.createQuery("SELECT o FROM OrderEntity o WHERE o.user = :user", OrderEntity.class)
-                   .setParameter("user", user.get())
-                   .getResultList();
+                    .setParameter("user", user.get())
+                    .getResultList();
         }
         return null;
     }
+
+
+
 }

@@ -7,7 +7,6 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-//        String[] strings = {"asds", "asda", "asasd"};
         return new Class[]{MvcConfigurer.class};
     }
 

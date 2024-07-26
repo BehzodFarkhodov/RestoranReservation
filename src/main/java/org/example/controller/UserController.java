@@ -4,13 +4,15 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.example.entity.OrderEntity;
 import org.example.entity.UserEntity;
+import org.example.service.OrderService;
+import org.example.service.RestaurantService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 
 @Controller
@@ -18,6 +20,9 @@ import java.util.Objects;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RestaurantService restaurantService;
 
     @GetMapping("/register")
     public String showRegistrationForm() {
@@ -48,15 +53,17 @@ public class UserController {
     }
 
 
-
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@ModelAttribute UserEntity user, HttpSession session) {
+    public String login(@ModelAttribute UserEntity user, HttpSession session, Model model) {
         UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
 
-        if (loggedInUser != null && loggedInUser.getEmail().equals("behzodfarhodov13@gmail.com")) {
-            session.setAttribute("userId", loggedInUser.getId());
+        session.setAttribute("userId", loggedInUser.getId());
+
+        if (user.getEmail().equals("muxammadaminartikov@gmail.com") || user.getEmail().equals("behzodfarhodov13@gmail.com")) {
             return "admin-main-menu";
         } else {
+
+            model.addAttribute("restaurants", restaurantService.getAll());
             return "main";
         }
     }
@@ -69,14 +76,29 @@ public class UserController {
 //            session.setAttribute("userId", loggedInUser.getId());
 //            return "create-restaurant";
 //        } else {
+//            session.setAttribute("user", loggedInUser);
 //            return "main";
 //        }
 //    }
+
 
     @RequestMapping("/update-profile")
     public String updateProfile(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email, HttpSession session) {
         List<OrderEntity> userOrders = userService.updateProfile(username, password, email);
         session.setAttribute("orders", userOrders);
+        return "main";
+    }
+
+    @RequestMapping("/user-menu")
+    public String showUserMenu() {
+        return "user-menu";
+    }
+
+    @RequestMapping("/update-balance")
+    public String updateBalance(@RequestParam("adjustBalance") double balance, HttpSession session) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        user.setBalance(balance);
+        userService.save(user);
         return "main";
     }
 

@@ -2,7 +2,6 @@ package org.example.controller;
 
 import org.example.entity.ProductEntity;
 import org.example.entity.RestaurantEntity;
-import org.example.enumertaror.RestaurantType;
 import org.example.repository.RestaurantRepo;
 import org.example.service.FileService;
 import org.example.service.ProductService;
@@ -41,39 +40,13 @@ public class ProductController {
         return "create-product";
     }
 
-    @GetMapping("/products")
+    @RequestMapping("/products")
     public String getAllProducts(Model model) {
         List<ProductEntity> products = productService.findAll();
         System.out.println("Products found: " + products.size());
         model.addAttribute("products", products);
         return "products";
     }
-
-@RequestMapping(value = "/create-product", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-public String create(@ModelAttribute ProductEntity product,
-                     @RequestParam("imageFile") MultipartFile file,
-                     @RequestParam("restaurantId") UUID restaurantId) {
-
-    try {
-        if (!file.isEmpty()) {
-            String imagePath = fileService.saveFile(file, true);
-            product.setImagePath(imagePath);
-        }
-        RestaurantEntity restaurant =restaurantRepo.findById(restaurantId);
-        if (restaurant != null) {
-            product.setRestaurant(restaurant);
-        }
-
-        productService.save(product);
-
-    } catch (IOException e) {
-        throw new RuntimeException(e);
-    }
-    return "products";
-}
-
-
-
 
     @GetMapping("/view-restaurant")
     public String viewRestaurantProducts(@RequestParam("id") UUID id, Model model) {
@@ -82,6 +55,29 @@ public String create(@ModelAttribute ProductEntity product,
         return "products";
     }
 
+    @RequestMapping(value = "/create-product", method = RequestMethod.POST,
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public String create(@ModelAttribute ProductEntity product,
+                         @RequestParam("imageFile") MultipartFile file,
+                         @RequestParam("restaurantId") UUID restaurantId) {
+
+        try {
+            if (!file.isEmpty()) {
+                String imagePath = fileService.saveFile(file, true);
+                product.setImagePath(imagePath);
+            }
+            RestaurantEntity restaurant = restaurantRepo.findById(restaurantId);
+            if (restaurant != null) {
+                product.setRestaurant(restaurant);
+            }
+
+            productService.save(product);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return "products";
+    }
 
 
 }
