@@ -40,7 +40,7 @@ public class ProductController {
         return "create-product";
     }
 
-    @GetMapping("/products")
+    @RequestMapping("/products")
     public String getAllProducts(Model model) {
         List<ProductEntity> products = productService.findAll();
         System.out.println("Products found: " + products.size());
