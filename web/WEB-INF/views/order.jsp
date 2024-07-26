@@ -95,7 +95,7 @@
         <form action="${pageContext.request.contextPath}/save-order" method="post">
             <input type="hidden" name="product.id" value="${product.id}">
             <input type="hidden" name="status" value="Pending">
-
+            <input type="hidden" name="user.id" value=""${user.id}">
             <div class="form-group mb-3">
                 <label for="quantity">Miqdor:</label>
                 <input type="number" id="quantity" name="quantity" class="form-control" min="1" max="${product.quantity}" required>

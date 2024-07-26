@@ -53,7 +53,7 @@ public class UserController {
 
         if (loggedInUser != null && user.getEmail().equals("muxammadaminartikov@gmail.com") || user.getEmail().equals("behzodfarhodov13@gmail.com")) {
 
-            session.setAttribute("userId", loggedInUser.getId());
+            session.setAttribute("user", loggedInUser);
             return "admin-main-menu";
         } else {
             return "main";
