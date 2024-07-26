@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.example.entity.UserEntity" %><%--
   Created by IntelliJ IDEA.
   User: Victus
   Date: 7/25/2024
@@ -16,6 +16,8 @@
     <h1>Mahsulotni Buyurtma Qilish</h1>
     <form action="${pageContext.request.contextPath}/save-order" method="post">
         <input type="hidden" name="product.id" value="${product.id}">
+        <input type="hidden" name="userId" value="${user.id}">
+
         <input type="hidden" name="status" value="Pending">
 
         <div class="form-group">
