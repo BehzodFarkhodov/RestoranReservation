@@ -92,7 +92,7 @@ public class UserController {
 
         List<OrderEntity> userOrders = userService.updateProfile(username, password, email);
         session.setAttribute("orders", userOrders);
-        return "user-menu";
+        return "main";
     }
 
     @RequestMapping("/user-menu")
@@ -107,7 +107,7 @@ public class UserController {
         balance = user.getBalance() + balance;
         user.setBalance(balance);
         userService.save(user);
-        return "user-menu";
+        return "main";
     }
 
     @RequestMapping("/user-orders")
