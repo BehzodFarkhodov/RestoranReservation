@@ -74,4 +74,12 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
         }
         return null;
     }
+
+    public UserEntity getUser(UUID userId) {
+        return repository.findById(userId);
+    }
+
+    public List<OrderEntity> getOrders(UserEntity user) {
+        return userRepo.getOrders(user.getEmail());
+    }
 }

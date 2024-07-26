@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: z.farhodov
-  Date: 18.07.2024
-  Time: 10:41
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -73,6 +66,7 @@
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="Enter new password if changing">
+        <input type="hidden" id="currentPassword" name="currentPassword" value="${user.password}">
 
         <button type="submit" name="action" value="updateProfile">Update Profile</button>
     </form>
@@ -87,7 +81,11 @@
         <input type="number" id="adjustBalance" name="adjustBalance" placeholder="Enter amount">
 
         <button type="submit" name="action" value="addBalance">Add to Balance</button>
-        <button type="submit" name="action" value="cashBalance">Cash from Balance</button>
+        <br>
+
+    </form>
+    <form method="post" action="user-orders">
+        <button type="submit" name="action" value="${user.getId()}">Order History</button>
     </form>
 </div>
 </body>
