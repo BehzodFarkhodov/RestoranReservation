@@ -46,16 +46,19 @@
             transition: transform 0.2s, box-shadow 0.2s;
             max-width: 500px; /* Limit width of the product details */
         }
+
         .product-details:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
         }
+
         .product-details img {
             max-width: 100%;
             height: auto;
             border-radius: 10px;
             max-height: 300px; /* Limit the height of the image */
         }
+
         .order-form {
             border: 1px solid #dee2e6;
             padding: 20px;
@@ -63,6 +66,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 400px; /* Limit width of the order form */
         }
+
         .container {
             display: flex;
             justify-content: space-between;
@@ -70,6 +74,7 @@
             margin-top: 30px;
             gap: 20px; /* Add space between the product details and form */
         }
+
         .form-group label {
             font-weight: bold; /* Make the label bold for better readability */
         }
@@ -94,11 +99,13 @@
         <h2>Mahsulotni Buyurtma Qilish</h2>
         <form action="${pageContext.request.contextPath}/save-order" method="post">
             <input type="hidden" name="product.id" value="${product.id}">
+            <input type="hidden" name="userId" value="${userId}">
             <input type="hidden" name="status" value="Pending">
             <input type="hidden" name="user.id" value=""${user.id}">
             <div class="form-group mb-3">
                 <label for="quantity">Miqdor:</label>
-                <input type="number" id="quantity" name="quantity" class="form-control" min="1" max="${product.quantity}" required>
+                <input type="number" id="quantity" name="quantity" class="form-control" min="1"
+                       max="${product.quantity}" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Buyurtma Qilish</button>

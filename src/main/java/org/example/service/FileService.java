@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FileService {
-    private String uploadPath = "C:\\Users\\z.farhodov\\Downloads\\Telegram Desktop\\e_commerse\\RestoranReservation\\web\\pictures";
+    private String uploadPath = "web/pictures";
 //    public String saveFile(Part part, boolean isImage) {
 //        if (isImage) {
 //            checkImageContentType(part);
@@ -102,7 +102,6 @@ public class FileService {
         }
     }
 
-    //salom saidalo
 
 
 
