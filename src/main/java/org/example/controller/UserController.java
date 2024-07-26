@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -82,23 +83,37 @@ public class UserController {
 
 
     @RequestMapping("/update-profile")
-    public String updateProfile(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email, HttpSession session) {
+    public String updateProfile(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("currentPassword") String currentPassword, @RequestParam("email") String email, HttpSession session) {
+
+        if (password == null || password.isEmpty()) {
+            password = currentPassword;
+        }
+
         List<OrderEntity> userOrders = userService.updateProfile(username, password, email);
         session.setAttribute("orders", userOrders);
         return "main";
     }
 
     @RequestMapping("/user-menu")
-    public String showUserMenu() {
+    public String showUserMenu(HttpSession session) {
+        session.setAttribute("user", userService.getUser((UUID) session.getAttribute("userId")));
         return "user-menu";
     }
 
     @RequestMapping("/update-balance")
     public String updateBalance(@RequestParam("adjustBalance") double balance, HttpSession session) {
         UserEntity user = (UserEntity) session.getAttribute("user");
+        balance = user.getBalance() + balance;
         user.setBalance(balance);
         userService.save(user);
         return "main";
+    }
+
+    @RequestMapping("/user-orders")
+    public String showUserOrders(HttpSession session) {
+        List<OrderEntity> userOrders = userService.getOrders(userService.getUser((UUID) session.getAttribute("userId")));
+        session.setAttribute("orders", userOrders);
+        return "user-orders";
     }
 
 
