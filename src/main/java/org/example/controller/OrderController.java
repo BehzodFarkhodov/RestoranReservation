@@ -49,12 +49,12 @@ public class OrderController {
     @RequestMapping(value = "/save-order", method = RequestMethod.POST)
     public String save(@ModelAttribute OrderEntity order, Model model, HttpSession session) {
 
-        UserEntity user = (UserEntity) session.getAttribute("user");
+        UUID userId = (UUID) session.getAttribute("userId");
 
-        if (Objects.isNull(user)) {
+        if (Objects.isNull(userId)) {
             return "redirect:/register";
         }
-        order.setUser(user);
+        order.setUser(userService.findById(userId));
         orderService.save(order);
         List<OrderEntity> orderEntities = orderService.findAll();
         model.addAttribute("orders", orderEntities);
