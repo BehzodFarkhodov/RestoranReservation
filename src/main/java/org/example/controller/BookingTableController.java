@@ -82,14 +82,12 @@ public class BookingTableController {
 
     @RequestMapping(value = "/booking-table", method = RequestMethod.GET)
     public String showBookingForm(@RequestParam("id") UUID restaurantId, HttpSession session, Model model) {
-        // userId ni olish va UserEntity ga o'tkazish
         UUID userId = (UUID) session.getAttribute("userId");
         if (userId == null) {
             model.addAttribute("message", "Please register or log in to book a table.");
             return "redirect:/register";
         }
 
-        // Foydalanuvchi ma'lumotlarini olish
         UserEntity user = userService.findById(userId);
         if (user == null) {
             model.addAttribute("message", "User not found.");
@@ -104,7 +102,6 @@ public class BookingTableController {
     @RequestMapping(value = "/booking-table", method = RequestMethod.POST)
     public String bookTable(@ModelAttribute("reservation") ReservationEntity reservation,
                             @RequestParam("restaurantId") UUID restaurantId, HttpSession session) {
-        // userId ni olish va UserEntity ga o'tkazish
         UUID userId = (UUID) session.getAttribute("userId");
         if (userId == null) {
             return "redirect:/register";
@@ -120,6 +117,6 @@ public class BookingTableController {
         reservation.setRestaurant(restaurant);
 
         reservationService.save(reservation);
-        return "redirect:/confirmation"; // Ushbu URL sizning JSP faylingiz nomiga mos kelishi kerak
+        return "main";
     }
 }

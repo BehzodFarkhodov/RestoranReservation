@@ -3,10 +3,12 @@ package org.example.repository;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.TypedQuery;
 import org.example.entity.RestaurantEntity;
+import org.example.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Repository
@@ -68,6 +70,22 @@ public RestaurantEntity save(RestaurantEntity restaurant) {
 
         return query.getResultList();
     }
+
+    public List<RestaurantEntity> findByUser(UserEntity user) {
+        String query = "SELECT r FROM RestaurantEntity r WHERE r.owner = :user";
+        return manager.createQuery(query, RestaurantEntity.class)
+                .setParameter("user", user)
+                .getResultList();
+    }
+
+    public List<RestaurantEntity> findByOwnerId(UUID userId) {
+        String query = "SELECT r FROM RestaurantEntity r WHERE r.owner.id = :userId";
+        return manager.createQuery(query, RestaurantEntity.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
+
+
 
 
 

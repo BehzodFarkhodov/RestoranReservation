@@ -79,6 +79,12 @@ public class UserRepo extends BaseRepo<UserEntity> {
         }
         return null;
     }
+    @Transactional
+    public UserEntity findByUsername(String username) {
+        return manager.createQuery("select u from UserEntity u where u.username = :username", UserEntity.class)
+                .setParameter("username", username)
+                .getSingleResult();
+    }
 
 
 

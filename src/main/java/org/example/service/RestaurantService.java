@@ -1,11 +1,15 @@
 package org.example.service;
 
+import org.example.DTO.RestaurantDTO;
 import org.example.entity.RestaurantEntity;
+import org.example.entity.UserEntity;
+import org.example.enumertaror.RestaurantType;
 import org.example.repository.RestaurantRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RestaurantService extends BaseService<RestaurantEntity, RestaurantRepo> {
@@ -27,5 +31,20 @@ public class RestaurantService extends BaseService<RestaurantEntity, RestaurantR
     public List<RestaurantEntity> searchRestaurants(String location, String name, String address) {
         return repository.findByFilters(location, name, address);
     }
+
+    public void createRestaurant(RestaurantEntity restaurant, UserEntity user) {
+        restaurant.setOwner(user);
+        repository.save(restaurant);
+    }
+
+
+
+    public List<RestaurantEntity> findByUser(UserEntity user) {
+        return repository.findByUser(user);
+    }
+    public List<RestaurantEntity> findAllByOwner(UUID userId) {
+        return repository.findByOwnerId(userId);
+    }
+
 
 }
