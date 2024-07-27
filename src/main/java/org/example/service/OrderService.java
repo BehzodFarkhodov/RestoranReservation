@@ -22,4 +22,5 @@ public class OrderService extends BaseService<OrderEntity,OrderRepo> {
     public List<OrderEntity> findAll() {
         return repository.findAll();
     }
+
 }
