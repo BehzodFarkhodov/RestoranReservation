@@ -23,6 +23,9 @@
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Home</a>
+</nav>
 <div class="container mt-5">
     <h2>Restaurants</h2>
     <div class="row">

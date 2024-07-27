@@ -1,9 +1,6 @@
 package org.example.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.example.enumertaror.RestaurantType;
 
@@ -24,7 +21,17 @@ public class RestaurantEntity extends BaseEntity {
     private String phone;
     private RestaurantType type;
     private String picturePath;
-    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ToString.Exclude
     private List<ProductEntity> menu;
+
+
+   //////
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity owner;
 
 }
