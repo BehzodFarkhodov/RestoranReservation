@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -20,6 +21,17 @@ public class ProductEntity extends BaseEntity {
     private Integer quantity;
     private String imagePath;
     @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
     private RestaurantEntity restaurant;
+
+
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity owner;
 }
+
+
 

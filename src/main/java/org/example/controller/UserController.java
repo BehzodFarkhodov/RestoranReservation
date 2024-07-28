@@ -6,6 +6,7 @@ import org.example.entity.OrderEntity;
 import org.example.entity.UserEntity;
 import org.example.service.RestaurantService;
 import org.example.service.UserService;
+import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,9 +97,14 @@ public class UserController {
 
     @RequestMapping("/user-menu")
     public String showUserMenu(HttpSession session) {
+        UUID userId = (UUID) session.getAttribute("userId");
+        if(userId ==null){
+            return "404";
+        }
         session.setAttribute("user", userService.getUser((UUID) session.getAttribute("userId")));
         return "user-menu";
     }
+
 
     @RequestMapping("/update-balance")
     public String updateBalance(@RequestParam("adjustBalance") double balance, HttpSession session) {

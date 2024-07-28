@@ -62,4 +62,43 @@ public class OrderController {
     }
 
 
+//    //// user orders - >
+//    @RequestMapping(value = "/save-order")
+//    public String savePageRes(@RequestParam("productId") UUID productId, Model model) {
+//        ProductEntity product = productService.findById(productId);
+//
+//        OrderEntity order = new OrderEntity();
+//        order.setProduct(product);
+//        model.addAttribute("order", order);
+//        model.addAttribute("product", product);
+//
+//        return "users-restaurant-order";
+//    }
+//
+//    @RequestMapping(value = "/save-order", method = RequestMethod.POST)
+//    public String saveResOrder(@ModelAttribute OrderEntity order, Model model, HttpSession session) {
+//        UUID userId = (UUID) session.getAttribute("userId");
+//
+//        if (Objects.isNull(userId)) {
+//            return "redirect:/register";
+//        }
+//        order.setUser(userService.findById(userId));
+//        orderService.save(order);
+//
+//        List<OrderEntity> orderEntities = orderService.findAll();
+//        model.addAttribute("orders", orderEntities);
+//
+//        return "users-restaurant-order";
+//    }
+
+    @RequestMapping(value = "/show-restaurant-order")
+    public String showRestaurantOrder(Model model) {
+        List<OrderEntity> orders = orderService.findAll();
+        model.addAttribute("orders", orders);
+
+        return "users-restaurant-order";
+    }
+
+
+
 }

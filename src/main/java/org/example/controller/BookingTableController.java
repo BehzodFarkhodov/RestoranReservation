@@ -53,30 +53,70 @@ public class BookingTableController {
 //        reservationService.save(reservation);
 //        return "redirect:/confirmation";
 //    }
-@RequestMapping(value = "/booking-table",method = RequestMethod.GET)
-public String showBookingForm(@RequestParam("id") UUID restaurantId, HttpSession session, Model model) {
-    UserEntity user = (UserEntity) session.getAttribute("loggedInUser");
-    if (user == null) {
-        model.addAttribute("message", "Please register or log in to book a table.");
-        return "redirect:/registration";
-    }
-    model.addAttribute("restaurantId", restaurantId);
-    model.addAttribute("reservation", new ReservationEntity());
-    return "booking-form"; // Ensure this corresponds to your JSP file name
-}
+//@RequestMapping(value = "/booking-table", method = RequestMethod.GET)
+//public String showBookingForm(@RequestParam("id") UUID restaurantId, HttpSession session, Model model) {
+//    UserEntity user = (UserEntity) session.getAttribute("userId");
+//    if (user == null) {
+//        model.addAttribute("message", "Please register or log in to book a table.");
+//        return "redirect:/register";
+//    }
+//    model.addAttribute("restaurantId", restaurantId);
+//    model.addAttribute("reservation", new ReservationEntity());
+//    return "booking-form";
+//}
+//
+//    @RequestMapping("/booking-table")
+//    public String bookTable(@ModelAttribute("reservation") ReservationEntity reservation,
+//                            @RequestParam("restaurantId") UUID restaurantId, HttpSession session) {
+//        UserEntity user = (UserEntity) session.getAttribute("userId");
+//        if (user == null) {
+//            return "redirect:/register";
+//        }
+//        reservation.setUser(user);
+//        RestaurantEntity restaurant = restaurantService.findById(restaurantId);
+//        reservation.setRestaurant(restaurant);
+//
+//        reservationService.save(reservation);
+//        return "redirect:/confirmation"; // Ensure this corresponds to your JSP file name
+//    }
 
-    @RequestMapping("/booking-table")
+    @RequestMapping(value = "/booking-table", method = RequestMethod.GET)
+    public String showBookingForm(@RequestParam("id") UUID restaurantId, HttpSession session, Model model) {
+        UUID userId = (UUID) session.getAttribute("userId");
+        if (userId == null) {
+            model.addAttribute("message", "Please register or log in to book a table.");
+            return "redirect:/register";
+        }
+
+        UserEntity user = userService.findById(userId);
+        if (user == null) {
+            model.addAttribute("message", "User not found.");
+            return "redirect:/register";
+        }
+
+        model.addAttribute("restaurantId", restaurantId);
+        model.addAttribute("reservation", new ReservationEntity());
+        return "booking-form";
+    }
+
+    @RequestMapping(value = "/booking-table", method = RequestMethod.POST)
     public String bookTable(@ModelAttribute("reservation") ReservationEntity reservation,
                             @RequestParam("restaurantId") UUID restaurantId, HttpSession session) {
-        UserEntity user = (UserEntity) session.getAttribute("loggedInUser");
-        if (user == null) {
-            return "redirect:/registration";
+        UUID userId = (UUID) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/register";
         }
+
+        UserEntity user = userService.findById(userId);
+        if (user == null) {
+            return "redirect:/register";
+        }
+
         reservation.setUser(user);
         RestaurantEntity restaurant = restaurantService.findById(restaurantId);
         reservation.setRestaurant(restaurant);
 
         reservationService.save(reservation);
-        return "redirect:/confirmation"; // Ensure this corresponds to your JSP file name
+        return "main";
     }
 }

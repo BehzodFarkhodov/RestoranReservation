@@ -82,4 +82,9 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
     public List<OrderEntity> getOrders(UserEntity user) {
         return userRepo.getOrders(user.getEmail());
     }
+
+
+    public UserEntity findByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
 }
