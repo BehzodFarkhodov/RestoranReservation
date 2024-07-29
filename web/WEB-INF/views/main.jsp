@@ -177,6 +177,7 @@
                     <div class="button-container">
                         <a href="view-restaurant?id=${restaurant.id}" class="btn btn-custom">See Restaurant</a>
                         <a href="booking-table?id=${restaurant.id}" class="btn btn-custom">Booking Table</a>
+                        <a href="write-comment?id=${restaurant.id}" class="btn-custom">Write Comment</a>
                     </div>
                 </div>
             </div>

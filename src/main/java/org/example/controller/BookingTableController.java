@@ -144,7 +144,7 @@
 
                 UserEntity user = userService.findById(userId);
                 if (user == null) {
-                    model.addAttribute("message", "Foydalanuvchi topilmadi.");
+                    model.addAttribute("message", "User not found");
                     return "404";
                 }
                 List<ReservationEntity> reservations = reservationService.findReservationsByUser(user);

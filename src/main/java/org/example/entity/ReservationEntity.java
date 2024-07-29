@@ -1,9 +1,6 @@
     package org.example.entity;
 
-    import jakarta.persistence.AttributeOverride;
-    import jakarta.persistence.Entity;
-    import jakarta.persistence.ManyToOne;
-    import jakarta.persistence.Table;
+    import jakarta.persistence.*;
     import lombok.AllArgsConstructor;
     import lombok.Getter;
     import lombok.NoArgsConstructor;
@@ -29,6 +26,7 @@
         private String phoneNumber;
         private LocalDateTime reservationDate;
         private TableType type;
+       @Enumerated(EnumType.STRING)
         private TableField nearTheWindow;
     }
 
