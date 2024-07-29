@@ -26,7 +26,7 @@ public class RestaurantEntity extends BaseEntity {
     private List<ProductEntity> menu;
 
 
-   //////
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity owner;
