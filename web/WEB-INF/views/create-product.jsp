@@ -49,7 +49,7 @@
 <body>
 <div class="container mt-5">
     <h2>Create Product</h2>
-    <form action="${pageContext.request.contextPath}/create-product" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/create-own-product" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="foodName">Food Name</label>
             <input type="text" id="foodName" name="foodName" class="form-control" required/>

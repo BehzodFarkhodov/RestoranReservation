@@ -24,7 +24,9 @@ public class OrderRepo extends BaseRepo<OrderEntity> {
 
     @Transactional
     public List<OrderEntity> findAll() {
-        return manager.createQuery("from OrderEntity", OrderEntity.class).getResultList();
+        return manager.createQuery
+                ("from OrderEntity", OrderEntity.class)
+                .getResultList();
     }
 
 

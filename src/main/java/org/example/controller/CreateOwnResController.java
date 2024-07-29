@@ -117,7 +117,7 @@ public class CreateOwnResController {
         return "redirect:/restaurants";
     }
 
-    ///////////
+
 
     @PostMapping("/delete-restaurant")
     public String deleteRestaurant(@RequestParam("restaurantId") UUID restaurantId, Model model) {
