@@ -11,6 +11,8 @@ import org.example.service.ReservationService;
 import org.example.service.RestaurantService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -115,6 +117,16 @@ public class CreateOwnResController {
         return "redirect:/restaurants";
     }
 
+
+
+    @PostMapping("/delete-restaurant")
+    public String deleteRestaurant(@RequestParam("restaurantId") UUID restaurantId, Model model) {
+        boolean deleted = restaurantService.deleteRestaurant(restaurantId);
+        if (!deleted) {
+            return "error-page";
+        }
+        return "show-all-own-user-restaurant";
+    }
 
 
 

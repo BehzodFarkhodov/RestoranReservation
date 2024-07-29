@@ -60,7 +60,7 @@ public class UserController {
 
         session.setAttribute("userId", loggedInUser.getId());
 
-        if (user.getEmail().equals("muxammadaminartikov@gmail.com") || user.getEmail().equals("behzodfarhodov13@gmail.com")) {
+        if (user.getEmail().equals("behzodfarhodov13@gmail.com")) {
             return "admin-main-menu";
         } else {
 
@@ -68,6 +68,7 @@ public class UserController {
             return "main";
         }
     }
+
 
 //    @RequestMapping(value = "login", method = RequestMethod.POST)
 //    public String login(@ModelAttribute UserEntity user, HttpSession session) {

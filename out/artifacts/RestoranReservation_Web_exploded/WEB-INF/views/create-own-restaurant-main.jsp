@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: z.farhodov
-  Date: 27.07.2024
-  Time: 12:32
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -35,12 +28,22 @@
             padding: 15px 30px;
             font-size: 16px;
             cursor: pointer;
-            margin: 10px;
+            margin: 10px auto; /* Center the buttons and add space between them */
             transition: background-color 0.3s ease;
             text-decoration: none;
+            display: block;
+            width: 250px; /* Fixed width for all buttons */
         }
         .button:hover {
             background-color: #ffd700;
+        }
+        .home-button {
+            background-color: white; /* White background for the Home button */
+            color: #333; /* Dark text color */
+            border: 2px solid #ffdd00; /* Border matching the button color */
+        }
+        .home-button:hover {
+            background-color: #f4f4f4; /* Slightly darker shade on hover */
         }
         a {
             text-decoration: none;
@@ -49,16 +52,15 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Home</a>
-</nav>
+
+<a class="button home-button" href="${pageContext.request.contextPath}/">Home</a>
 <div class="container">
     <h1>Here you can create your personal restaurant account</h1>
     <a class="button" href="${pageContext.request.contextPath}/create-own-restaurant">Create Your Restaurant Account</a>
     <a class="button" href="${pageContext.request.contextPath}/create-own-product">Create Restaurant's Product</a>
-    <a class="button"href="${pageContext.request.contextPath}/show-all-users-restaurant">My All Restaurant Account</a>
+    <a class="button" href="${pageContext.request.contextPath}/show-all-users-restaurant">My All Restaurant Account</a>
     <a class="button" href="${pageContext.request.contextPath}/show-restaurant-order">Show Restaurant's Orders</a>
+    <a class="button" href="${pageContext.request.contextPath}/show-restaurant-reservation-order">Show Restaurant's Reservation Orders</a>
 </div>
 </body>
 </html>
-
