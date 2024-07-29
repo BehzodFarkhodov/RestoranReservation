@@ -14,5 +14,6 @@ import lombok.Setter;
 @Table(name = "comment")
 @Entity
 public class CommentEntity extends BaseEntity{
+
     private String text;
 }
