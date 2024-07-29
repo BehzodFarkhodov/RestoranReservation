@@ -1,3 +1,5 @@
+
+
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <%--<!DOCTYPE html>--%>
 <%--<html lang="en">--%>
@@ -51,6 +53,7 @@
 <%--</head>--%>
 <%--<body>--%>
 <%--<div class="container">--%>
+<%--    <a href="${pageContext.request.contextPath}/" class="home-button">Home</a>--%>
 <%--    <h2>Book a Table</h2>--%>
 <%--    <form action="${pageContext.request.contextPath}/booking-table" method="post">--%>
 <%--        <input type="hidden" name="restaurantId" value="${restaurantId}">--%>
@@ -61,6 +64,10 @@
 <%--        <div class="mb-3">--%>
 <%--            <label for="phoneNumber" class="form-label">Phone Number</label>--%>
 <%--            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>--%>
+<%--        </div>--%>
+<%--        <div class="mb-3">--%>
+<%--            <label for="reservationDate" class="form-label">Reservation Date</label>--%>
+<%--            <input type="datetime-local" class="form-control" id="reservationDate" name="reservationDate" required>--%>
 <%--        </div>--%>
 <%--        <button type="submit" class="btn btn-primary w-100">Book Now</button>--%>
 <%--    </form>--%>
@@ -107,24 +114,25 @@
             transition: border-color 0.3s, box-shadow 0.3s;
         }
         .form-control:focus {
-            border-color: #f0ad4e; /* Yellow color */
+            border-color: #f0ad4e;
             box-shadow: 0 0 8px rgba(240, 173, 78, 0.5);
         }
         .btn-primary {
-            background-color: #f0ad4e; /* Yellow color */
+            background-color: #f0ad4e;
             border-color: #f0ad4e;
             color: white;
             transition: background-color 0.3s, border-color 0.3s;
         }
         .btn-primary:hover {
-            background-color: #ec971f; /* Darker yellow */
+            background-color: #ec971f;
             border-color: #ec971f;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2>Book a Table</h2>
+    <a href="${pageContext.request.contextPath}/" class="home-button">Home</a>
+    <h2>Book a Table at ${restaurant.name}</h2>
     <form action="${pageContext.request.contextPath}/booking-table" method="post">
         <input type="hidden" name="restaurantId" value="${restaurantId}">
         <div class="mb-3">
@@ -137,7 +145,22 @@
         </div>
         <div class="mb-3">
             <label for="reservationDate" class="form-label">Reservation Date</label>
-            <input type="date" class="form-control" id="reservationDate" name="reservationDate" required>
+            <input type="datetime-local" class="form-control" id="reservationDate" name="reservationDate" required>
+        </div>
+        <div class="mb-3">
+            <label for="type" class="form-label">Table Type</label>
+            <select class="form-control" id="type" name="type" required>
+                <option value="PREMIUM">Premium</option>
+                <option value="SIMPLE">Simple</option>
+                <option value="MIDDLE">Middle</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="nearTheWindow" class="form-label">Near the Window</label>
+            <select class="form-control" id="nearTheWindow" name="nearTheWindow" required>
+                <option value="YES">Yes</option>
+                <option value="NO">No</option>
+            </select>
         </div>
         <button type="submit" class="btn btn-primary w-100">Book Now</button>
     </form>
