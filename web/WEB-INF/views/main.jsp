@@ -149,7 +149,7 @@
         <form action="${pageContext.request.contextPath}/search" method="get"   class="d-flex w-100">
             <input type="text" name="location" class="form-control" placeholder="Location" />
             <input type="text" name="name" class="form-control" placeholder="Restaurant Name" />
-            <input type="text" name="address" class="form-control ms-2" placeholder="Address" />
+            <input type="text" name="address" class="form-control" placeholder="Address" />
             <button type="submit" class="btn">Search</button>
         </form>
     </div>
@@ -172,11 +172,12 @@
                         <strong>Address:</strong> ${restaurant.address}<br>
                         <strong>Location:</strong> ${restaurant.location}<br>
                         <strong>Phone:</strong> ${restaurant.phone}<br>
-                        <strong>Type:</strong> ${restaurant.type}
+<%--                        <strong>Type:</strong> ${restaurant.type}--%>
                     </p>
                     <div class="button-container">
                         <a href="view-restaurant?id=${restaurant.id}" class="btn btn-custom">See Restaurant</a>
                         <a href="booking-table?id=${restaurant.id}" class="btn btn-custom">Booking Table</a>
+                        <a href="write-comment?id=${restaurant.id}" class="btn-custom">Write Comment</a>
                     </div>
                 </div>
             </div>

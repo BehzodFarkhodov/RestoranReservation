@@ -120,8 +120,8 @@ public class ProductController {
         }
 
         ProductEntity product = new ProductEntity();
-        product.setFoodName(productDTO.getName());
-        product.setFoodDescription(productDTO.getDescription());
+        product.setFoodName(productDTO.getFoodName());
+        product.setFoodDescription(productDTO.getFoodDescription());
         product.setPrice(productDTO.getPrice());
         product.setQuantity(productDTO.getQuantity());
         product.setImagePath(productDTO.getImagePath());
