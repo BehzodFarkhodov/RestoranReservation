@@ -2,7 +2,7 @@ package org.example.DTO;
 
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
-import org.example.entity.RestaurantEntity;
+
 
 import java.util.UUID;
 

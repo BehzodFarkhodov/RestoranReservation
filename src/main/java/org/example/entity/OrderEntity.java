@@ -21,6 +21,4 @@ public class OrderEntity extends BaseEntity{
     private ProductEntity product;
     private Integer quantity;
     private String status;
-
-
 }
