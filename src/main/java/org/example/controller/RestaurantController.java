@@ -1,9 +1,12 @@
 package org.example.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.example.entity.RestaurantEntity;
+import org.example.entity.UserEntity;
 import org.example.enumertaror.RestaurantType;
 import org.example.service.FileService;
 import org.example.service.RestaurantService;
+import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class RestaurantController {
@@ -19,6 +23,8 @@ public class RestaurantController {
     private RestaurantService restaurantService;
     @Autowired
     private FileService fileService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = "/create-restaurant")
     public String showCreateRestaurantForm(Model model) {
@@ -68,6 +74,24 @@ public class RestaurantController {
         List<RestaurantEntity> restaurants = restaurantService.searchRestaurants(location, name, address);
         model.addAttribute("restaurants", restaurants);
         return "main";
+    }
+
+
+    @GetMapping("/show-all-users-restaurant")
+    public String showUserRestaurants(HttpSession session, Model model) {
+        UUID userId = (UUID) session.getAttribute("userId");
+        if (userId == null) {
+            return "404";
+        }
+
+        UserEntity user = userService.findById(userId);
+        if (user == null) {
+            return "404";
+        }
+
+        List<RestaurantEntity> restaurants = restaurantService.findAllByOwner(userId);
+        model.addAttribute("restaurants", restaurants);
+        return "show-all-own-user-restaurant";
     }
 
 

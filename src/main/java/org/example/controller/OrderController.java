@@ -52,7 +52,7 @@ public class OrderController {
         UUID userId = (UUID) session.getAttribute("userId");
 
         if (Objects.isNull(userId)) {
-            return "redirect:/register";
+            return "404";
         }
         order.setUser(userService.findById(userId));
         orderService.save(order);
@@ -95,9 +95,9 @@ public class OrderController {
     public String showRestaurantOrder(Model model) {
         List<OrderEntity> orders = orderService.findAll();
         model.addAttribute("orders", orders);
-
         return "users-restaurant-order";
     }
+
 
 
 

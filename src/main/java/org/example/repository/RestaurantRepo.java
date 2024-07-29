@@ -84,6 +84,21 @@ public RestaurantEntity save(RestaurantEntity restaurant) {
                 .setParameter("userId", userId)
                 .getResultList();
     }
+    @Transactional
+    public boolean hasProducts(UUID restaurantId) {
+        String query = "SELECT COUNT(p) FROM ProductEntity p WHERE p.restaurant.id = :restaurantId";
+        Long count = manager.createQuery(query, Long.class)
+                .setParameter("restaurantId", restaurantId)
+                .getSingleResult();
+        return count > 0;
+    }
+   @Transactional
+    public void deleteById(UUID restaurantId) {
+        RestaurantEntity restaurant = manager.find(RestaurantEntity.class, restaurantId);
+        if (restaurant != null) {
+            manager.remove(restaurant);
+        }
+    }
 
 
 

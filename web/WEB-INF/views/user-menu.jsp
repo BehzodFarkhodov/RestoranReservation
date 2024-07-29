@@ -16,8 +16,9 @@
             margin: auto;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
-        h2 {
+        h2, h3 {
             text-align: center;
             color: #333;
         }
@@ -32,10 +33,16 @@
             margin-bottom: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
-        button {
-            background-color: #5C85D6;
-            color: white;
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="number"]:focus {
+            transform: scale(1.05);
+            border-color: #ffeb3b;
+            box-shadow: 0 0 5px rgba(255, 235, 59, 0.5);
+        }
+        button, .home-button {
+            background-color: #ffeb3b;
+            color: #333;
             border: none;
             padding: 10px 20px;
             text-align: center;
@@ -45,18 +52,22 @@
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 5px;
+            transition: background-color 0.3s;
         }
-        button:hover {
-            background-color: #3e73de;
+        button:hover, .home-button:hover {
+            background-color: #fdd835;
         }
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- Home Button -->
+    <a href="${pageContext.request.contextPath}/" class="home-button">Home</a>
+
     <h2>User Profile</h2>
 
     <!-- Profile Update Form -->
-    <form action="update-profile" method="post"> <!-- Update this action to your servlet URL -->
+    <form action="update-profile" method="post">
         <h3>Update Profile</h3>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" value="${user.username}">
@@ -72,7 +83,7 @@
     </form>
 
     <!-- Balance Adjustment Form -->
-    <form action="update-balance" method="post"> <!-- Update this action to your servlet URL -->
+    <form action="update-balance" method="post">
         <h3>Adjust Balance</h3>
         <label for="currentBalance">Current Balance:</label>
         <input type="text" id="currentBalance" name="currentBalance" value="${user.balance}" readonly>
@@ -82,7 +93,6 @@
 
         <button type="submit" name="action" value="addBalance">Add to Balance</button>
         <br>
-
     </form>
     <form method="post" action="user-orders">
         <button type="submit" name="action" value="${user.getId()}">Order History</button>

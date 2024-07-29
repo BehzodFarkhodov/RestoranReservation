@@ -85,33 +85,48 @@ public class BookingTableController {
         UUID userId = (UUID) session.getAttribute("userId");
         if (userId == null) {
             model.addAttribute("message", "Please register or log in to book a table.");
-            return "redirect:/register";
+            return "404";
         }
 
         UserEntity user = userService.findById(userId);
         if (user == null) {
             model.addAttribute("message", "User not found.");
-            return "redirect:/register";
+            return "404";
         }
-
         model.addAttribute("restaurantId", restaurantId);
         model.addAttribute("reservation", new ReservationEntity());
         return "booking-form";
     }
+
+//    @RequestMapping(value = "/booking-table", method = RequestMethod.POST)
+//    public String bookTable(@ModelAttribute("reservation") ReservationEntity reservation,
+//                            @RequestParam("restaurantId") UUID restaurantId, HttpSession session) {
+//        UUID userId = (UUID) session.getAttribute("userId");
+//        if (userId == null) {
+//            return "redirect:/register";
+//        }
+//
+//        UserEntity user = userService.findById(userId);
+//        if (user == null) {
+//            return "redirect:/register";
+//        }
+//
+//        reservation.setUser(user);
+//        RestaurantEntity restaurant = restaurantService.findById(restaurantId);
+//        reservation.setRestaurant(restaurant);
+//
+//        reservationService.save(reservation);
+//        return "main";
+//    }
 
     @RequestMapping(value = "/booking-table", method = RequestMethod.POST)
     public String bookTable(@ModelAttribute("reservation") ReservationEntity reservation,
                             @RequestParam("restaurantId") UUID restaurantId, HttpSession session) {
         UUID userId = (UUID) session.getAttribute("userId");
         if (userId == null) {
-            return "redirect:/register";
+            return "404";
         }
-
         UserEntity user = userService.findById(userId);
-        if (user == null) {
-            return "redirect:/register";
-        }
-
         reservation.setUser(user);
         RestaurantEntity restaurant = restaurantService.findById(restaurantId);
         reservation.setRestaurant(restaurant);
