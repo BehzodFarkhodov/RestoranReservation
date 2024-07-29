@@ -8,8 +8,8 @@ import java.util.UUID;
 
 @Data
 public class ProductDTO {
-    private String name;
-    private String description;
+    private String foodName;
+    private String foodDescription;
     private double price;
     private Integer quantity;
     private String imagePath;

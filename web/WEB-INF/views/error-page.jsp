@@ -43,7 +43,7 @@
 </head>
 <body>
 <div class="error-container">
-    <h1>Delete Error</h1>
+    <h1>Does not delete this restaurant,because it has product</h1>
     <p>${errorMessage}</p>
     <a href="${pageContext.request.contextPath}/show-all-users-restaurant" class="back-btn">Back</a>
 </div>

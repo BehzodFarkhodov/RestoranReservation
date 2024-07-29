@@ -82,7 +82,7 @@
         <button type="submit" name="action" value="updateProfile">Update Profile</button>
     </form>
 
-    <!-- Balance Adjustment Form -->
+    <!-- Balance Update Form -->
     <form action="update-balance" method="post">
         <h3>Adjust Balance</h3>
         <label for="currentBalance">Current Balance:</label>
@@ -90,12 +90,17 @@
 
         <label for="adjustBalance">Adjust Balance:</label>
         <input type="number" id="adjustBalance" name="adjustBalance" placeholder="Enter amount">
-
         <button type="submit" name="action" value="addBalance">Add to Balance</button>
-        <br>
     </form>
+
+    <!-- Order History -->
     <form method="post" action="user-orders">
         <button type="submit" name="action" value="${user.getId()}">Order History</button>
+    </form>
+
+    <!-- My Reservations Button -->
+    <form method="post" action="user-reservations">
+        <button type="submit" name="action" value="${user.getId()}">My Reservations</button>
     </form>
 </div>
 </body>
