@@ -78,10 +78,28 @@
         .form-group label {
             font-weight: bold; /* Make the label bold for better readability */
         }
+
+        .home-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .home-button:hover {
+            background-color: #e2e6ea;
+        }
     </style>
 </head>
 <body>
 <div class="container">
+    <a href="${pageContext.request.contextPath}/" class="home-button">Home</a> <!-- Home button -->
+
     <!-- Product Details -->
     <div class="product-details">
         <h1>${product.foodName}</h1>
@@ -101,7 +119,6 @@
             <input type="hidden" name="product.id" value="${product.id}">
             <input type="hidden" name="userId" value="${userId}">
             <input type="hidden" name="status" value="Pending">
-            <input type="hidden" name="user.id" value=""${user.id}">
             <div class="form-group mb-3">
                 <label for="quantity">Miqdor:</label>
                 <input type="number" id="quantity" name="quantity" class="form-control" min="1"
