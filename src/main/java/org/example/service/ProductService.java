@@ -54,11 +54,7 @@ public class ProductService extends BaseService<ProductEntity, ProductRepository
 
     @Transactional
     public void delete(UUID id) {
+
         productRepository.delete(id);
     }
-
-
-
-
-
 }
