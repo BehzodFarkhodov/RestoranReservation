@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -66,6 +67,11 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
         </div>
         <button type="submit" class="btn btn-primary w-100">Login</button>
+        <div class="error">
+            <c:if test="${not empty errorMessage}">
+                ${errorMessage}
+            </c:if>
+        </div>
     </form>
 </div>
 </body>
