@@ -70,7 +70,7 @@ public String create(@ModelAttribute ProductEntity product,
         throw new RuntimeException(e);
     }
     return "products";
-
+//dasda
 
 
 
