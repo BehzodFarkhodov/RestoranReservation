@@ -17,10 +17,10 @@ public class ProductEntity extends BaseEntity {
     private double price;
     private Integer quantity;
     private String imagePath;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "restaurant_id", nullable = false)
     private RestaurantEntity restaurant;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity owner;
 }
