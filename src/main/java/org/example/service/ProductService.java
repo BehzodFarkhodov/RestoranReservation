@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -43,6 +44,21 @@ public class ProductService extends BaseService<ProductEntity, ProductRepository
     public void createProduct(ProductEntity product) {
         repository.save(product);
     }
+
+
+    public ProductEntity getProductById(UUID id) {
+        Optional<ProductEntity> byId = Optional.ofNullable(productRepository.findById(id));
+        return byId.orElse(null);
+
+    }
+
+    @Transactional
+    public void delete(UUID id) {
+        productRepository.delete(id);
+    }
+
+
+
 
 
 }

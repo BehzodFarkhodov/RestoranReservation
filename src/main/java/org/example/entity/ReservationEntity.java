@@ -28,6 +28,7 @@
         private TableType type;
        @Enumerated(EnumType.STRING)
         private TableField nearTheWindow;
+
     }
 
 

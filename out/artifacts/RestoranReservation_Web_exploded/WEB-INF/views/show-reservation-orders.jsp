@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>My Restaurant Reservations</title>
+    <title>Mening restoran rezervatsiyalarim</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,18 +55,18 @@
 </head>
 <body>
 
-<a class="home-button" href="${pageContext.request.contextPath}/">Home</a>
+<a class="home-button" href="${pageContext.request.contextPath}/">Asosiy sahifa</a>
 <div class="container">
-    <h1>Your Restaurant Reservations</h1>
+    <h1>Sizning restoran rezervatsiyalaringiz</h1>
     <table>
         <thead>
         <tr>
-            <th>Username</th>
+            <th>Foydalanuvchi nomi</th>
             <th>Email</th>
-            <th>Reservation Date</th>
-            <th>Number of People</th>
-            <th>Status</th>
-            <th>Near Window</th>
+            <th>Rezervatsiya sanasi</th>
+            <th>Odamlar soni</th>
+            <th>Holat</th>
+            <th>Deraza yonida</th>
         </tr>
         </thead>
         <tbody>

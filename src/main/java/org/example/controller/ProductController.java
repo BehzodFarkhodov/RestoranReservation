@@ -160,12 +160,55 @@ public class ProductController {
         return "products";
     }
 
+
+
     @GetMapping("/view-restaurant")
     public String viewRestaurantProducts(@RequestParam("id") UUID id, Model model) {
         List<ProductEntity> products = productService.getProductsByRestaurant(id);
         model.addAttribute("products", products);
         return "products";
     }
+
+
+
+
+    @PostMapping("/view-own-restaurant")
+    public String viewOwnRestaurantProduct(@RequestParam("restaurantId") UUID id,Model model){
+        List<ProductEntity> productEntities = productService.getProductsByRestaurant(id);
+        model.addAttribute("products",productEntities);
+        return "view-own-restaurant-product";
+    }
+
+
+
+    @GetMapping("/update-product")
+    public String showUpdateForm(@RequestParam("productId") UUID productId, Model model) {
+        ProductEntity product = productService.getProductById(productId);
+        model.addAttribute("product", product);
+        return "update-product";
+    }
+
+    @PostMapping("/update-product")
+    public String updateProduct(@ModelAttribute ProductEntity product) {
+        productService.save(product);
+        return "view-own-restaurant-product";
+    }
+
+
+    @PostMapping("/delete-product")
+    public String deleteProduct(@RequestParam("productId") UUID productId, Model model) {
+        try {
+            productService.delete(productId);
+            model.addAttribute("successMessage", "Product successfully deleted");
+        } catch (IllegalStateException e) {
+//            model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+        }
+        List<ProductEntity> products = productService.findAll();
+        model.addAttribute("products", products);
+        return "view-own-restaurant-product";
+    }
+
 
 
 

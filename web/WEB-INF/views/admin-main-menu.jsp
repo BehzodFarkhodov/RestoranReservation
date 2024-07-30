@@ -42,8 +42,8 @@
 
 <h1>Admin Main Menu</h1>
 
-<button class="button"><a href="${pageContext.request.contextPath}/create-restaurant">Add Restaurant</a></button>
-<button class="button"><a href="${pageContext.request.contextPath}/create-product">Add Product</a></button>
+<button class="button"><a href="${pageContext.request.contextPath}/show-all-restaurant">Show All Restaurant</a></button>
+<%--<button class="button"><a href="${pageContext.request.contextPath}/create-product">Show All </a></button>--%>
 
 </body>
 </html>
