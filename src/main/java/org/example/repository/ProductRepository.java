@@ -32,4 +32,25 @@ public class ProductRepository extends BaseRepo<ProductEntity> {
                 .getResultList();
     }
 
+    public boolean hasOrders(UUID productId) {
+        String query = "SELECT COUNT(o) FROM OrderEntity o WHERE o.product.id = :productId";
+        Long count = manager.createQuery(query, Long.class)
+                .setParameter("productId", productId)
+                .getSingleResult();
+        return count > 0;
+    }
+
+    @Transactional
+    public void delete(UUID productId) {
+        if (hasOrders(productId)) {
+            throw new IllegalStateException("Mahsulotga bog'langan buyurtmalar mavjud. O'chirib bo'lmaydi.");
+        }
+        ProductEntity product = manager.find(ProductEntity.class, productId);
+        if (product != null) {
+            manager.remove(product);
+        }
+    }
+
+
+
 }

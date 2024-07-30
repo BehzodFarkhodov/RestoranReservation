@@ -58,12 +58,15 @@ public class UserController {
     public String login(@ModelAttribute UserEntity user, HttpSession session, Model model) {
         UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
 
+        if (!(loggedInUser.getPassword().equals(user.getPassword()))) {
+            model.addAttribute("errorMessage", "Username or password is incorrect");
+            return "login";
+        }
         session.setAttribute("userId", loggedInUser.getId());
 
         if (user.getEmail().equals("behzodfarhodov13@gmail.com")) {
             return "admin-main-menu";
         } else {
-
             model.addAttribute("restaurants", restaurantService.getAll());
             return "main";
         }
