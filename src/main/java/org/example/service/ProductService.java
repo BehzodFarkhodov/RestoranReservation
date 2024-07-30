@@ -4,6 +4,7 @@ import org.example.entity.ProductEntity;
 import org.example.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,6 +38,10 @@ public class ProductService extends BaseService<ProductEntity, ProductRepository
 
     public List<ProductEntity> getProductsByRestaurant(UUID restaurantId) {
         return productRepository.findByRestaurantId(restaurantId);
+    }
+    @Transactional
+    public void createProduct(ProductEntity product) {
+        repository.save(product);
     }
 
 

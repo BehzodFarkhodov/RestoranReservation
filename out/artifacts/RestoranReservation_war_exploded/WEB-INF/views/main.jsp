@@ -349,7 +349,7 @@
                     </p>
                     <div class="button-container">
                         <a href="view-restaurant?id=${restaurant.id}" class="btn btn-custom">See Restaurant</a>
-                        <a href="book-restaurant?id=${restaurant.id}" class="btn btn-custom">Booking Table</a>
+                        <a href="booking-table?id=${restaurant.id}" class="btn btn-custom">Booking Table</a>
                     </div>
                 </div>
             </div>

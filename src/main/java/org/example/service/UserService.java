@@ -1,10 +1,12 @@
 package org.example.service;
 
+import org.example.entity.OrderEntity;
 import org.example.entity.UserEntity;
 import org.example.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,7 +15,6 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
     @Autowired
     private VerificationService verificationService;
     @Autowired
-
     private UserRepo userRepo;
 
     public UserService(UserRepo repository) {
@@ -53,5 +54,37 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
     public UserEntity login(String email, String password) {
         Optional<UserEntity> userEntity = repository.signIn(email, password);
         return userEntity.orElseThrow(() -> new RuntimeException("user not found "));
+    }
+
+
+    public double balance(UUID id, double amount) {
+        return repository.balance(id, amount);
+    }
+
+    public List<OrderEntity> updateProfile(String username, String password, String email) {
+        Optional<UserEntity> userEntity = repository.findByEmail(email);
+        if (userEntity.isPresent()) {
+            UserEntity user = userEntity.get();
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setEmail(email);
+            userRepo.save(user);
+
+            return userRepo.getOrders(email);
+        }
+        return null;
+    }
+
+    public UserEntity getUser(UUID userId) {
+        return repository.findById(userId);
+    }
+
+    public List<OrderEntity> getOrders(UserEntity user) {
+        return userRepo.getOrders(user.getEmail());
+    }
+
+
+    public UserEntity findByUsername(String username) {
+        return userRepo.findByUsername(username);
     }
 }

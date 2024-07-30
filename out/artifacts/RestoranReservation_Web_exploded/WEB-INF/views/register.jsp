@@ -1,85 +1,92 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Register</title>
     <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-5zmQ4roQRRu5exf5p0xU8bs9k4kZXJ6yyRLn5fh7Rp9HtHgnd64QZjEKmM5dU8vX" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: url('https://i.pinimg.com/originals/43/71/97/437197fdd0a42f3cdf72dc86e16f2a12.jpg') no-repeat center center fixed;
+            background: url('https://i.pinimg.com/originals/57/4b/08/574b0843ffd08cd9bdc968aeac2eb919.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            color: #f8f9fa;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.9); /* Yengilroq fon */
-            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.7); /* Darker background with transparency for better contrast */
+            padding: 30px 50px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             text-align: center;
-            max-width: 500px; /* Formaning maksimal kengligini belgilash */
+            max-width: 500px;
             width: 100%;
         }
 
         .container h1 {
             margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
+            font-size: 28px;
+            color: #ffeb3b; /* Yellow color */
         }
 
-        .container .form-label {
-            color: #333;
+        .form-label {
+            color: #fff; /* White color for better contrast */
             text-align: left;
+            margin-bottom: 10px;
             display: block;
-            margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        .container .form-control {
+        .form-control {
             border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            background-color: #fff; /* White background */
+            color: #333;
             width: 100%;
-            box-sizing: border-box;
+            margin-bottom: 15px;
         }
 
-        .container .form-control:focus {
-            border-color: #9381ff;
-            box-shadow: none;
+        .form-control:focus {
+            border-color: #ffeb3b; /* Yellow border focus */
+            box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
         }
 
-        .container .btn-primary {
-            background-color: #9381ff;
-            border-color: #9381ff;
+        .btn-primary {
+            background-color: #ffeb3b;
+            border-color: #ffeb3b;
+            border-radius: 25px;
+            padding: 10px 20px;
+            width: 100%;
             transition: background-color 0.3s, border-color 0.3s;
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
+            color: #333;
+            font-weight: bold;
         }
 
-        .container .btn-primary:hover {
-            background-color: #6b5ebc;
-            border-color: #6b5ebc;
+        .btn-primary:hover {
+            background-color: #fdd835;
+            border-color: #fdd835;
         }
 
-        .container a {
+        a {
             display: inline-block;
-            margin: 10px 20px;
+            margin-top: 15px;
             padding: 10px 20px;
             text-decoration: none;
-            color: #fff;
-            background: #9381ff;
-            border-radius: 5px;
+            color: #333; /* Dark text color */
+            background: #ffeb3b; /* Yellow background */
+            border-radius: 25px;
             transition: background 0.3s;
+            font-weight: bold;
         }
 
-        .container a:hover {
-            background: #6b5ebc;
+        a:hover {
+            background: #fdd835;
         }
     </style>
 </head>
@@ -97,11 +104,12 @@
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
+    <a href="${pageContext.request.contextPath}/login">Already have an account? Log in here</a>
 </div>
 
 <!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRtRYmBOZ4h1bg7I5lDzzk5Wkl4lC6G7RyzzNpeub" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eNNi1tZgT9ppY6UQpl3uKO0I+idKrxGV/XhXkwi9Mt6ozcDkn4sl9KBP6V9KrY" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIqF0CJXwEFgTWH2NfMRzylzvBuZB1zfoPWRRKE4jO0p+kvJ7Lr" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

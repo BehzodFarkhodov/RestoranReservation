@@ -1,12 +1,13 @@
 package org.example.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.enumertaror.UserRole;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,10 +15,19 @@ import org.example.enumertaror.UserRole;
 @Setter
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity {
+public class UserEntity extends BaseEntity{
     private String username;
     private String password;
     private String email;
     private UserRole role;
     private double balance;
+
+
+
+   /////
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RestaurantEntity> restaurants;
+
+
 }

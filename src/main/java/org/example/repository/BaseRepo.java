@@ -20,9 +20,9 @@ public class BaseRepo <T extends BaseEntity> {
     manager.remove(manager.find(type, id));
     }
 
-     @Transactional
-    public T findById(UUID id){
-        return manager.find(type,id);
+    @Transactional
+    public T findById(UUID id) {
+        return manager.find(type, id);
     }
 
     @Transactional

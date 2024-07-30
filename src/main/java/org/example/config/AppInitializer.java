@@ -7,7 +7,6 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-//        String[] strings = {"asds", "asda", "asasd"};
         return new Class[]{MvcConfigurer.class};
     }
 
@@ -26,6 +25,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement("");
         registration.setMultipartConfig(multipartConfigElement);
     }
+
+
 
     
 }
