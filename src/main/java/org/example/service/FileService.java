@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FileService {
-    private String uploadPath = "C:\\Users\\z.farhodov\\Downloads\\Telegram Desktop\\e_commerse\\RestoranReservation\\web\\pictures";
+    private String uploadPath = "C:\\Users\\Victus\\IdeaProjects\\RestoranReservationt\\src\\main\\resources";
 //    public String saveFile(Part part, boolean isImage) {
 //        if (isImage) {
 //            checkImageContentType(part);
@@ -65,16 +65,16 @@ public class FileService {
 
 
     public String saveFile(MultipartFile file, boolean isImage) throws IOException {
-    if (isImage) {
-        checkImageContentType(file);
-    } else {
-        checkBookContentType(file);
-    }
-    String filename = getFileName(file);
+        if (isImage) {
+            checkImageContentType(file);
+        } else {
+            checkBookContentType(file);
+        }
+        String filename = getFileName(file);
 
-    file.transferTo(new File(uploadPath + File.separator + filename));
-    return filename;
-}
+        file.transferTo(new File(uploadPath + File.separator + filename));
+        return filename;
+    }
 
     public List<MyFile> getFileList() {
         return Arrays.stream(new File(uploadPath).listFiles())
@@ -101,16 +101,6 @@ public class FileService {
             throw new InvalidInputException("only pdfs are accepted");
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

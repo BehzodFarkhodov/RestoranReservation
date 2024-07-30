@@ -24,10 +24,6 @@ public class ProductEntity extends BaseEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     private RestaurantEntity restaurant;
 
-
-
-
-
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity owner;
