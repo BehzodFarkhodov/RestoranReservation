@@ -30,4 +30,6 @@ public class UserEntity extends BaseEntity{
     private List<RestaurantEntity> restaurants;
 
 
+
+
 }
