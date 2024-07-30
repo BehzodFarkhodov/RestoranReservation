@@ -60,8 +60,9 @@
     <a class="button" href="${pageContext.request.contextPath}/create-own-product">Create Restaurant's Product</a>
     <a class="button" href="${pageContext.request.contextPath}/show-all-users-restaurant">My All Restaurant Account</a>
     <a class="button" href="${pageContext.request.contextPath}/show-restaurant-order">Show Restaurant's Orders</a>
-
     <a class="button" href="${pageContext.request.contextPath}/show-restaurant-reservation-order">Show Restaurant's Reservation Orders</a>
+    <a class="button" href="${pageContext.request.contextPath}/show-restaurant-comments">Show Restaurant's Comments</a>
+
 </div>
 </body>
 </html>
