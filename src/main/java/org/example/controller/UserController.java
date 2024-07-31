@@ -59,7 +59,6 @@ public class UserController {
         UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
 
         if (!(loggedInUser.getPassword().equals(user.getPassword()))) {
-            model.addAttribute("errorMessage", "Username or password is incorrect");
             return "login";
         }
         session.setAttribute("userId", loggedInUser.getId());
