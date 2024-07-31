@@ -201,12 +201,11 @@ public class ProductController {
             productService.delete(productId);
             model.addAttribute("successMessage", "Product successfully deleted");
         } catch (IllegalStateException e) {
-//            model.addAttribute("errorMessage", e.getMessage());
             return "error";
         }
         List<ProductEntity> products = productService.findAll();
         model.addAttribute("products", products);
-        return "view-own-restaurant-product";
+        return "create-own-restaurant-main";
     }
 
 

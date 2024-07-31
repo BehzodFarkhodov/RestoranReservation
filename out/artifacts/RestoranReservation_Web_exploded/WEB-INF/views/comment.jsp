@@ -3,25 +3,28 @@
 <head>
     <title>Comment Page</title>
     <style>
-        /* Inline CSS for styling */
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://img.travelbugphilippines.com/img/united-states/michelin-starred-restaurants-in-las-vegas.jpg'); /* Rasm URL'ini moslang */
+            background-image: url('https://i.pinimg.com/originals/c5/ca/84/c5ca845e68f7545bea10789bc588638d.jpg');
             background-size: cover;
             background-position: center;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .comment-container {
             width: 80%;
             max-width: 600px;
-            margin: 100px auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1s ease-in;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ffd700; /* Yellow border */
+            text-align: center;
         }
 
         .form-group {
@@ -34,48 +37,32 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .form-control:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-            outline: none;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
+        .btn-primary,
+        .btn-home {
+            background-color: #ffd700; /* Yellow background */
             border: none;
             color: #fff;
             padding: 12px 24px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
             font-size: 18px;
-            margin: 10px 0;
             cursor: pointer;
             border-radius: 5px;
+            text-align: center;
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+            margin-top: 10px;
         }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
+        .btn-primary:hover,
+        .btn-home:hover {
+            background-color: #e5c100; /* Darker yellow on hover */
             transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
     </style>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-<div id="root" class="comment-container">
+<div class="comment-container">
+    <a href="${pageContext.request.contextPath}/" class="home-btn">Home</a> <!-- Home button -->
     <form action="${pageContext.request.contextPath}/comment-save" method="post">
         <div class="form-group">
             <label for="text">Comment</label>
@@ -86,30 +73,5 @@
         <button type="submit" class="btn-primary">Create</button>
     </form>
 </div>
-
-<script type="text/babel">
-    const { useState } = React;
-
-    function App() {
-        const [hovered, setHovered] = useState(false);
-
-        const handleMouseEnter = () => setHovered(true);
-        const handleMouseLeave = () => setHovered(false);
-
-        return (
-            <div>
-                <button
-                    className={`btn-primary ${hovered ? 'hovered' : ''}`}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                >
-                    Create
-                </button>
-            </div>
-        );
-    }
-
-    ReactDOM.render(<App />, document.getElementById('root'));
-</script>
 </body>
 </html>

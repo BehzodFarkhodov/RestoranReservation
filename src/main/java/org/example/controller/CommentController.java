@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.example.DTO.CommentDTO;
 import org.example.entity.*;
 import org.example.service.CommentService;
 import org.example.service.RestaurantService;
@@ -8,11 +9,9 @@ import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -54,5 +53,14 @@ public class CommentController {
         commentService.saveComment(comment);
         return "comment";
     }
+
+    @GetMapping("/show-restaurant-comments")
+    public String showRestaurantComments(@RequestParam("id") UUID restaurantId, Model model) {
+        List<CommentDTO> comments = commentService.getCommentsForRestaurant(restaurantId);
+        model.addAttribute("comments", comments);
+        return "restaurant-comments";
+    }
+
+
 
 }
