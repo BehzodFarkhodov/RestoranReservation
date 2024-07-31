@@ -54,11 +54,16 @@
         .container button:hover {
             background: #6b5ebc;
         }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1 class="text-center">Login</h1>
+    <h1>Login</h1>
     <form action="${pageContext.request.contextPath}/login" method="post">
         <div class="mb-3">
             <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>

@@ -1,7 +1,9 @@
 package org.example.controller;
+
 import jakarta.servlet.http.HttpSession;
 import org.example.entity.OrderEntity;
 import org.example.entity.ProductEntity;
+import org.example.entity.UserEntity;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
 import org.example.service.UserService;
@@ -40,7 +42,7 @@ public class OrderController {
         return "order";
     }
 
-    @RequestMapping(value = "/save-order", method = RequestMethod.POST)
+ /*   @RequestMapping(value = "/save-order", method = RequestMethod.POST)
     public String save(@ModelAttribute OrderEntity order, Model model, HttpSession session) {
 
         UUID userId = (UUID) session.getAttribute("userId");
@@ -53,11 +55,47 @@ public class OrderController {
         List<OrderEntity> orderEntities = orderService.findAll();
         model.addAttribute("orders", orderEntities);
         return "order";
+    }*/
+
+    @RequestMapping(value = "/save-order", method = RequestMethod.POST)
+    public String save(@ModelAttribute OrderEntity order, Model model, HttpSession session) {
+        UUID userId = (UUID) session.getAttribute("userId");
+
+        if (Objects.isNull(userId)) {
+            return "404";
+        }
+
+        UserEntity user = userService.findById(userId);
+        ProductEntity product = productService.findById(order.getProduct().getId());
+
+        if (user == null || product == null) {
+            return "404";
+        }
+
+        double productPrice = product.getPrice();
+        double userBalance = user.getBalance();
+
+        if (userBalance < productPrice) {
+            model.addAttribute("errorMessage", "Sizning balansingiz yetarli emas.");
+            return "order";
+        }
+
+
+        user.setBalance(userBalance - productPrice);
+        userService.save(user);
+
+
+        order.setUser(user);
+        orderService.save(order);
+
+        List<OrderEntity> orderEntities = orderService.findAll();
+        model.addAttribute("orders", orderEntities);
+
+        return "order";
     }
 
 
-
-    @RequestMapping( "/show-restaurant-order")
+    @RequestMapping("/show-restaurant-order")
     public String showRestaurantOrder(Model model) {
         List<OrderEntity> orders = orderService.findAll();
         model.addAttribute("orders", orders);
@@ -76,8 +114,6 @@ public class OrderController {
         model.addAttribute("orders", orders);
         return mav;
     }*/
-
-
 
 
 }
