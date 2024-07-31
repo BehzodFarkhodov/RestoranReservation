@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,56 +35,6 @@ public class ProductController {
     private FileService fileService;
     @Autowired
     private UserService userService;
-
-
-//    @RequestMapping("/create-product")
-//    public String save(Model model) {
-//        model.addAttribute("restaurant", new RestaurantEntity());
-//        model.addAttribute("restaurants", restaurantService.getAll());
-//        return "create-product";
-//    }
-//
-//    @RequestMapping("/products")
-//    public String getAllProducts(Model model) {
-//        List<ProductEntity> products = productService.findAll();
-//        System.out.println("Products found: " + products.size());
-//        model.addAttribute("products", products);
-//        return "products";
-//    }
-//
-//    @GetMapping("/view-restaurant")
-//    public String viewRestaurantProducts(@RequestParam("id") UUID id, Model model) {
-//        List<ProductEntity> products = productService.getProductsByRestaurant(id);
-//        model.addAttribute("products", products);
-//        return "products";
-//    }
-//
-//    @RequestMapping(value = "/create-product", method = RequestMethod.POST,
-//            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-//    public String create(@ModelAttribute ProductEntity product,
-//                         @RequestParam("imageFile") MultipartFile file,
-//                         @RequestParam("restaurantId") UUID restaurantId) {
-//
-//        try {
-//            if (!file.isEmpty()) {
-//                String imagePath = fileService.saveFile(file, true);
-//                product.setImagePath(imagePath);
-//            }
-//            RestaurantEntity restaurant = restaurantRepo.findById(restaurantId);
-//            if (restaurant != null) {
-//                product.setRestaurant(restaurant);
-//            }
-//
-//            productService.save(product);
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return "products";
-//    }
-
-
-    //////// craete user own controller
 
     @GetMapping("/create-own-product")
     public String showCreateProductForm(Model model,HttpSession session) {
@@ -137,21 +89,6 @@ public class ProductController {
     }
 
 
-
-//    @GetMapping("/list")
-//    public String listProducts(Model model) {
-//        List<ProductEntity> products = productService.findAll();
-//        model.addAttribute("products", products);
-//        return "show-own-product";
-//    }
-//
-//    @GetMapping("/view-restaurant")
-//    public String viewRestaurantProducts(@RequestParam("id") UUID id, Model model) {
-//        List<ProductEntity> products = productService.getProductsByRestaurant(id);
-//        model.addAttribute("products", products);
-//        return "show-own-product";
-//    }
-
     @RequestMapping("/products")
     public String getAllProducts(Model model) {
         List<ProductEntity> products = productService.findAll();
@@ -181,18 +118,7 @@ public class ProductController {
 
 
 
-    @GetMapping("/update-product")
-    public String showUpdateForm(@RequestParam("productId") UUID productId, Model model) {
-        ProductEntity product = productService.getProductById(productId);
-        model.addAttribute("product", product);
-        return "update-product";
-    }
 
-    @PostMapping("/update-product")
-    public String updateProduct(@ModelAttribute ProductEntity product) {
-        productService.save(product);
-        return "view-own-restaurant-product";
-    }
 
 
     @PostMapping("/delete-product")
@@ -208,7 +134,53 @@ public class ProductController {
         return "create-own-restaurant-main";
     }
 
+    @GetMapping("/update-product")
+    public ModelAndView showUpdateForm(@RequestParam("productId") UUID productId) {
+        ProductEntity product = productService.getProductById(productId);
+        if (product == null) {
+            return new ModelAndView("error").addObject("message", "Product not found");
+        }
+        return new ModelAndView("update-product").addObject("product", product);
+    }
 
+    @PostMapping("/update-product")
+    public String updateProduct(
+            @RequestParam("productId") UUID productId,
+            @RequestParam("foodName") String foodName,
+            @RequestParam("foodDescription") String foodDescription,
+            @RequestParam("price") double price,
+            @RequestParam("quantity") int quantity,
+            @RequestParam("imagePath") String imagePath,
+            HttpSession session,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            //UserEntity owner = (UserEntity) session.getAttribute("userId");
+            UUID owner = (UUID) session.getAttribute("userId");
+            if (owner == null) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Sessiyada egasi topilmadi");
+                return "404";
+            }
+
+            ProductEntity product = productService.findById(productId);
+            if (product == null) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Mahsulot topilmadi");
+                return "error";
+            }
+            product.setFoodName(foodName);
+            product.setFoodDescription(foodDescription);
+            product.setPrice(price);
+            product.setQuantity(quantity);
+            product.setImagePath(imagePath);
+            product.setOwner(product.getOwner());
+            productService.updateProduct(product);
+            redirectAttributes.addFlashAttribute("successMessage", "Mahsulot muvaffaqiyatli yangilandi");
+            return "create-own-restaurant-main";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Mahsulotni yangilashda xato: " + e.getMessage());
+            return "error";
+        }
+    }
 
 
 }
