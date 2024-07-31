@@ -1,24 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: z.farhodov
-  Date: 27.07.2024
-  Time: 17:09
-  To change this template use File | Settings | File Templates.
---%>
-<!-- show-restaurant-orders.jsp -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Restaurant Orders</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    <style>
         body {
             font-family: Arial, sans-serif;
             background: #f8f9fa;
             padding: 20px;
+            position: relative; /* Tugmani yuqori chapda joylashtirish uchun kerak */
         }
         .container {
             background: #fff;
@@ -38,9 +29,42 @@
         th {
             background-color: #f1f1f1;
         }
+        .home-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #FFC107; /* Sariq rang */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .home-button:hover {
+            background-color: #e0a800; /* Yengilroq sariq rang (hover effekti) */
+        }
+        .btn-accept {
+            background-color: #28a745; /* Yashil rang */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s; /* Qimirlash effektini qo'shish uchun */
+        }
+        .btn-accept:hover {
+            background-color: #218838; /* Qulayroq yashil rang (hover effekti) */
+        }
+        .btn-accept:active {
+            transform: scale(0.95); /* Bosilganda qimirlash effekti */
+        }
     </style>
 </head>
 <body>
+<a href="/" class="home-button">Home</a>
+
 <div class="container">
     <h1 class="text-center">Restaurant Orders</h1>
     <table class="table">
@@ -51,22 +75,30 @@
             <th>Quantity</th>
             <th>Order Date</th>
             <th>Status</th>
+            <th>Action</th> <!-- Yangi ustun qo'shildi -->
         </tr>
         </thead>
         <tbody>
         <c:forEach var="order" items="${orders}">
             <tr>
+                <td>${order.user.username}</td>
                 <td>${order.product.foodName}</td>
                 <td>${order.quantity}</td>
+                <td>${order.createdDateTime}</td>
+                <td>${order.status}</td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/accept-order" method="post">
+                        <input type="hidden" name="orderId" value="${order.id}"/>
+                        <button type="submit" class="btn btn-accept">ACCEPT</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body>
 </html>

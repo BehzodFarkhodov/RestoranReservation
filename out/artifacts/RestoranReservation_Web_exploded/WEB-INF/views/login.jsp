@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -22,6 +23,8 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            max-width: 400px;
+            width: 100%;
         }
 
         .container h1 {
@@ -30,29 +33,19 @@
             color: #333;
         }
 
-        .container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .container .form-control {
+            margin-bottom: 10px;
         }
 
-        .container button {
-            width: 100%;
-            padding: 10px;
-            margin: 20px 0;
-            background: #9381ff;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
+        .container .btn-primary {
+            background-color: #ffdd57; /* Yellow */
+            border-color: #ffdd57;
+            color: #333;
         }
 
-        .container button:hover {
-            background: #6b5ebc;
+        .container .btn-primary:hover {
+            background-color: #ffc107; /* Darker yellow */
+            border-color: #ffc107;
         }
 
         .error {
@@ -79,5 +72,7 @@
         </div>
     </form>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

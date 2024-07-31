@@ -41,7 +41,7 @@ public class CommentController {
         model.addAttribute("comment", comment);
         model.addAttribute("restaurant", restaurant);
 
-        List<CommentEntity> allComments = commentService.getAllComments();
+        List<CommentEntity> allComments = commentService.findCommentsByRestaurantId(restaurantId);
         model.addAttribute("comments", allComments);
         return "comment";
     }
@@ -51,23 +51,17 @@ public class CommentController {
     public String saveComment(@ModelAttribute CommentEntity comment,
                               HttpSession session, Model model) {
 
-
         UUID userId = (UUID) session.getAttribute("userId");
-
         model.addAttribute("restaurant", restaurantService.findById(comment.getRestaurant().getId()));
-
 
         if (Objects.isNull(userId)) {
             return "404";
         }
-
-
         comment.setUser(userService.findById(userId));
         comment.setRestaurant(restaurantService.findById(comment.getRestaurant().getId()));
         commentService.saveComment(comment);
 
-
-        List<CommentEntity> allComments = commentService.getAllComments();
+        List<CommentEntity> allComments = commentService.findCommentsByRestaurantId(comment.getRestaurant().getId());
         model.addAttribute("comments", allComments);
         return "comment";
     }

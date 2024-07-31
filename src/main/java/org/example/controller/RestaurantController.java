@@ -34,14 +34,6 @@ public class RestaurantController {
         return "create-restaurant";
     }
 
-
-
-//    @RequestMapping("/create-restaurant")
-//    public String createRestaurant(@ModelAttribute RestaurantEntity restaurant, Model model) {
-//        restaurantService.save(restaurant);
-//        return "redirect:/restaurants";
-//    }
-
     @RequestMapping(value = "/create-restaurant",method = RequestMethod.POST)
     public String createRestaurant(@ModelAttribute RestaurantEntity restaurant,
                                    @RequestParam("picture") MultipartFile file) {

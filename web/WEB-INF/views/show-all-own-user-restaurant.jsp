@@ -115,12 +115,20 @@
                             <!-- Delete Button -->
                             <form action="${pageContext.request.contextPath}/delete-restaurant" method="post">
                                 <input type="hidden" name="restaurantId" value="${restaurant.id}">
-                                <button type="submit" class="btn delete-btn">Delete</button>
+                                <button type="submit" class="btn delete-btn">Delete Restaurant</button>
                             </form>
                             <!-- View Restaurant Button -->
                             <form action="${pageContext.request.contextPath}/view-own-restaurant" method="post">
                                 <input type="hidden" name="restaurantId" value="${restaurant.id}">
                                 <button type="submit" class="btn view-btn">View Restaurant</button>
+                            </form>
+                            <form action="${pageContext.request.contextPath}/view-own-order-restaurant" method="post">
+                                <input type="hidden" name="restaurantId" value="${restaurant.id}">
+                                <button type="submit" class="btn view-btn">Show Orders</button>
+                            </form>
+                            <form action="${pageContext.request.contextPath}/view-own-reservation-restaurant" method="post">
+                                <input type="hidden" name="restaurantId" value="${restaurant.id}">
+                                <button type="submit" class="btn view-btn">Show Reservation</button>
                             </form>
                         </div>
                     </div>

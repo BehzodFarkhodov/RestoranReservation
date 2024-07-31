@@ -43,14 +43,14 @@ public class ProductRepository extends BaseRepo<ProductEntity> {
     @Transactional
     public void delete(UUID productId) {
         if (hasOrders(productId)) {
-            throw new IllegalStateException("Mahsulotga bog'langan buyurtmalar mavjud. O'chirib bo'lmaydi.");
+            throw new IllegalStateException("Error");
         }
         ProductEntity product = manager.find(ProductEntity.class, productId);
         if (product != null) {
+
+            product.setRestaurant(null);
+
             manager.remove(product);
         }
     }
-
-
-
 }

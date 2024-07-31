@@ -21,7 +21,8 @@ public class RestaurantEntity extends BaseEntity {
     private String phone;
     private RestaurantType type;
     private String picturePath;
-    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany
     @ToString.Exclude
     private List<ProductEntity> menu;
 

@@ -41,6 +41,22 @@
             text-align: center;
             color: #6c757d;
         }
+        .cancel-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .cancel-button:hover {
+            background-color: #c82333; /* Yengilroq qizil rang (hover effekti) */
+        }
+        .cancel-button:active {
+            transform: scale(0.95); /* Qimirlaydigan effekt */
+        }
     </style>
 </head>
 <body>
@@ -58,6 +74,7 @@
                 <th>Quantity</th>
                 <th>Status</th>
                 <th>Time</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -68,6 +85,12 @@
                     <td>${order.quantity}</td>
                     <td>${order.status}</td>
                     <td>${order.getCreatedDateTime()}</td>
+                    <td>
+                        <form action="${pageContext.request.contextPath}/cancel-order" method="post">
+                            <input type="hidden" name="orderId" value="${order.id}">
+                            <button type="submit" class="cancel-button">Cancel</button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

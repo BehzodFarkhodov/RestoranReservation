@@ -30,5 +30,11 @@ public class CommentRepo extends BaseRepo<CommentEntity> {
         CommentEntity commentEntity = manager.find(CommentEntity.class, comment);
         manager.remove(commentEntity);
     }
+    @Transactional
+    public List<CommentEntity> findCommentsByRestaurantId(UUID restaurantId) {
+        return manager.createQuery("from CommentEntity where restaurant.id = :restaurantId", CommentEntity.class)
+                .setParameter("restaurantId", restaurantId)
+                .getResultList();
+    }
 
 }
