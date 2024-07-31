@@ -106,7 +106,7 @@
         <button type="submit" name="action" value="${user.getId()}">Order History</button>
     </form>
 
-    <form method="post" action="user-reservations">
+    <form method="post" action="view-my-reservations">
         <button type="submit" name="action" value="${user.getId()}">My Reservations</button>
     </form>
 </div>

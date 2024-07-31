@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.example.entity.OrderEntity;
 import org.example.entity.ProductEntity;
+import org.example.entity.ReservationEntity;
 import org.example.entity.UserEntity;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.List;
@@ -117,16 +119,43 @@ public class OrderController {
 
 
 
+    @RequestMapping(value = "/accept-order",method = RequestMethod.POST)
+    public String acceptOrders(@RequestParam("orderId") UUID orderId, RedirectAttributes redirectAttributes) {
+        OrderEntity order = orderService.findById(orderId);
+        order.setStatus("ACCEPTED");
+        orderService.save(order);
+        redirectAttributes.addFlashAttribute("message", "Reservation accepted and user notified!");
+        return "users-restaurant-order";
+    }
 
 
-   /* @GetMapping( "/show-restaurant-order")
-    public ModelAndView helper(Model model){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("users-restaurant-order");
-        List<OrderEntity> orders = orderService.findAll();
+
+    @RequestMapping(value = "/show-accepted-orders", method = RequestMethod.GET)
+    public String showAcceptedOrders(HttpSession session, Model model) {
+        UUID userId = (UUID) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+        List<OrderEntity> orders = orderService.findAcceptedOrdersByUserId(userId);
         model.addAttribute("orders", orders);
-        return mav;
-    }*/
+        return "show-accepted-orders";
+    }
+
+    @RequestMapping(value = "/cancel-order", method = RequestMethod.POST)
+    public String cancelOrder(@RequestParam("orderId") UUID orderId, RedirectAttributes redirectAttributes) {
+        try {
+            orderService.deleteOrder(orderId);
+            redirectAttributes.addFlashAttribute("message", "Order successfully canceled!");
+        } catch (IllegalStateException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+        }
+        return "user-menu";
+    }
+
+
+
+
+
 
 
 }

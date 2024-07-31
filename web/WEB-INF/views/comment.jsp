@@ -284,13 +284,12 @@
         <h2 class="text-center">Add Comment</h2>
         <form action="${pageContext.request.contextPath}/comment-save" method="post">
             <div class="form-group">
-                <label for="text">Comment</label>
                 <input type="hidden" name="restaurant.id" value="${restaurant.id}">
                 <input type="hidden" name="user.id" value="${userId}">
                 <input type="text" id="text" name="text" placeholder="Enter your comment" class="form-control"
                        required/>
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Send</button>
         </form>
     </div>
 </div>

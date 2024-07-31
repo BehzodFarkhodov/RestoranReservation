@@ -28,7 +28,9 @@ public class CommentService extends BaseService<CommentEntity, CommentRepo> {
         repository.deleteComment(id);
     }
 
-
+    public List<CommentEntity> findCommentsByRestaurantId(UUID restaurantId) {
+        return repository.findCommentsByRestaurantId(restaurantId);
+    }
 }
 
 
