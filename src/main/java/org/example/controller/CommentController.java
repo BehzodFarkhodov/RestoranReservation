@@ -79,27 +79,7 @@ public class CommentController {
     }
 
 
-    /*@RequestMapping(value = "/comment", method = RequestMethod.GET)
-    public String showComments(Model model, HttpSession session) {
-        UUID userId = (UUID) session.getAttribute("userId");
 
-        if (Objects.isNull(userId)) {
-            return "404";
-        }
-
-
-        UserEntity user = userService.findById(userId);
-        if (user == null) {
-            return "404";
-        }
-
-
-        List<CommentEntity> comments = commentService.getAllComments();
-        model.addAttribute("comments", comments);
-        model.addAttribute("userId", userId);
-
-        return "comment";
-    }*/
 
 
 }
