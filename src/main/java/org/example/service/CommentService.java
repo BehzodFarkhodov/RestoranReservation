@@ -5,6 +5,7 @@ import org.example.repository.CommentRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CommentService extends BaseService<CommentEntity, CommentRepo> {
@@ -19,8 +20,14 @@ public class CommentService extends BaseService<CommentEntity, CommentRepo> {
 
 
     public List<CommentEntity> getAllComments() {
-        return repository.findAll();
+        return repository.getAllComments();
     }
+
+
+    public void deleteComment(UUID id ) {
+        repository.deleteComment(id);
+    }
+
 
 }
 

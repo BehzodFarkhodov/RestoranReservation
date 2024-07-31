@@ -1,32 +1,36 @@
 package org.example.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import org.example.entity.BaseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
-public class BaseRepo <T extends BaseEntity> {
+public class BaseRepo<T extends BaseEntity> {
     protected Class<T> type;
-@PersistenceContext
+    @PersistenceContext
     protected EntityManager manager;
 
 
-
     @Transactional
-    public void delete(UUID id){
-    manager.remove(manager.find(type, id));
+    public void delete(UUID id) {
+        manager.remove(manager.find(type, id));
     }
 
     @Transactional
     public T findById(UUID id) {
+        if (Objects.isNull(this.type)) {
+            throw new IllegalStateException("Entity type is not set");
+        }
         return manager.find(type, id);
     }
 
     @Transactional
-    public T save(T entity){
+    public T save(T entity) {
         manager.persist(entity);
         return entity;
     }
