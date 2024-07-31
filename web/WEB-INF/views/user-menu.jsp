@@ -7,17 +7,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 40px;
+            background: url('https://bogatyr.club/uploads/posts/2023-03/1678880620_bogatyr-club-p-vostochnaya-kukhnya-fon-foni-krasivo-11.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
-            background: white;
             max-width: 500px;
-            margin: auto;
+            margin: 40px auto;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly opaque background for readability */
         }
 
         h2, h3 {

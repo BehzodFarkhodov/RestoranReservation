@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.example.entity.OrderEntity;
 import org.example.entity.ProductEntity;
 import org.example.entity.UserEntity;
@@ -98,6 +99,18 @@ public class OrderController {
     @RequestMapping("/show-restaurant-order")
     public String showRestaurantOrder(Model model) {
         List<OrderEntity> orders = orderService.findAll();
+        model.addAttribute("orders", orders);
+        return "users-restaurant-order";
+    }
+
+    @RequestMapping("/view-own-order-restaurant")
+    public String showRestaurantOwnOrder(@RequestParam("restaurantId")UUID restaurantId, Model model,HttpSession session){
+        UUID userId = (UUID) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/login";
+        }
+        List<OrderEntity> orders = orderService.findOrdersByUserAndRestaurant(restaurantId);
         model.addAttribute("orders", orders);
         return "users-restaurant-order";
     }

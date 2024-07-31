@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: z.farhodov
+  Date: 31.07.2024
+  Time: 18:12
+  To change this template use File | Settings | File Templates.
+--%>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 
 <%--&lt;%&ndash;--%>
@@ -105,32 +112,37 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="text-center">Restaurant Orders</h1>
+    <h1 class="text-center">Restaurant Reservations</h1>
     <table class="table">
         <thead>
         <tr>
-            <th>Username</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Order Date</th>
+            <th>User</th>
+            <th>Restaurant</th>
+            <th>Number of People</th>
             <th>Status</th>
+            <th>Phone Number</th>
+            <th>Reservation Date</th>
+            <th>Table Type</th>
+            <th>Near The Window</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="order" items="${orders}">
+        <c:forEach var="reservation" items="${reservations}">
             <tr>
-                <td>${order.user.username}</td>
-                <td>${order.product.foodName}</td>
-                <td>${order.quantity}</td>
-                <td>${order.createdDateTime}</td>
-                <td>${order.status}</td>
+                <td>${reservation.user.username}</td>
+                <td>${reservation.restaurant.name}</td>
+                <td>${reservation.numberOfPeople}</td>
+                <td>${reservation.status}</td>
+                <td>${reservation.phoneNumber}</td>
+                <td>${reservation.reservationDate}</td>
+                <td>${reservation.type}</td>
+                <td>${reservation.nearTheWindow}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
 
-<!-- Bootstrap JS va bog'liqliklar -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>

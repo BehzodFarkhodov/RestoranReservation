@@ -1,50 +1,25 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Victus
-  Date: 7/25/2024
-  Time: 11:34 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>Mahsulotni Buyurtma Qilish</title>--%>
-<%--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<div class="container">--%>
-<%--    <h1>Mahsulotni Buyurtma Qilish</h1>--%>
-<%--    <form action="${pageContext.request.contextPath}/save-order" method="post">--%>
-<%--        <input type="hidden" name="product.id" value="${product.id}">--%>
-<%--        <input type="hidden" name="status" value="Pending">--%>
-
-<%--        <div class="form-group">--%>
-<%--            <label for="quantity">Miqdor:</label>--%>
-<%--            <input type="number" id="quantity" name="quantity" class="form-control" min="1" required>--%>
-<%--        </div>--%>
-
-<%--        <button type="submit" class="btn btn-primary">Buyurtma Qilish</button>--%>
-<%--    </form>--%>
-<%--</div>--%>
-<%--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
-<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>--%>
-<%--</body>--%>
-<%--</html>--%>
-
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Mahsulotni Buyurtma Qilish</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
+        body {
+            background-image: url('https://avatars.mds.yandex.net/i?id=0fd820900b9f9832c4f5bca892e8d97a_l-5234139-images-thumbs&n=13');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #000; /* Default text color set to black */
+        }
+
         .product-details {
             border: 1px solid #dee2e6;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s, box-shadow 0.2s;
-            max-width: 500px; /* Limit width of the product details */
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.9);
         }
 
         .product-details:hover {
@@ -56,7 +31,7 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
-            max-height: 300px; /* Limit the height of the image */
+            max-height: 300px;
         }
 
         .order-form {
@@ -64,7 +39,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px; /* Limit width of the order form */
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
         }
 
         .container {
@@ -72,34 +48,49 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-top: 30px;
-            gap: 20px; /* Add space between the product details and form */
+            gap: 20px;
         }
 
         .form-group label {
-            font-weight: bold; /* Make the label bold for better readability */
+            font-weight: bold;
+            color: #000; /* Label color set to black */
         }
 
         .home-button {
             display: inline-block;
             margin-bottom: 20px;
             padding: 10px 20px;
-            background-color: #f8f9fa;
+            background-color: rgba(255, 193, 7, 0.9);
             color: #333;
-            border: 1px solid #dee2e6;
+            border: 1px solid #ffc107;
             border-radius: 5px;
             text-decoration: none;
+            font-weight: bold;
             transition: background-color 0.3s;
         }
 
         .home-button:hover {
-            background-color: #e2e6ea;
+            background-color: rgba(255, 193, 7, 1);
+        }
+
+        .btn-primary {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-primary:hover {
+            background-color: #e0a800;
+            border-color: #e0a800;
+        }
+
+        .product-details h1, .product-details h3, .product-details p, .order-form h2 {
+            color: #000; /* Set the color of these elements to black */
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <a href="${pageContext.request.contextPath}/" class="home-button">Home</a> <!-- Home button -->
-
+    <a href="${pageContext.request.contextPath}/" class="home-button">Home</a>
     <!-- Product Details -->
     <div class="product-details">
         <h1>${product.foodName}</h1>
@@ -107,32 +98,29 @@
             <img src="${pageContext.request.contextPath}/pictures/${product.imagePath}" alt="${product.foodName}">
         </div>
         <div class="product-info">
-            <h3>Narxi: ${product.price}</h3>
+            <h3>Price: ${product.price}</h3>
             <p>${product.foodDescription}</p>
         </div>
     </div>
 
     <!-- Order Form -->
     <div class="order-form">
-        <h2>Mahsulotni Buyurtma Qilish</h2>
+        <h2>Choose quantity and create order</h2>
         <form action="${pageContext.request.contextPath}/save-order" method="post">
             <input type="hidden" name="product.id" value="${product.id}">
             <input type="hidden" name="userId" value="${userId}">
             <input type="hidden" name="status" value="Pending">
             <div class="form-group mb-3">
-                <label for="quantity">Miqdor:</label>
-                <input type="number" id="quantity" name="quantity" class="form-control" min="1"
-                       max="${product.quantity}" required>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" class="form-control" min="1" max="${product.quantity}" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Buyurtma Qilish</button>
+            <button type="submit" class="btn btn-primary">Order</button>
         </form>
     </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
-

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -40,6 +41,9 @@ public class OrderService extends BaseService<OrderEntity,OrderRepo> {
 
     public List<OrderEntity> findAll() {
         return repository.findAll();
+    }
+    public List<OrderEntity> findOrdersByUserAndRestaurant(UUID restaurantId) {
+        return repository.findOrdersByUserAndRestaurant(restaurantId);
     }
 
 }

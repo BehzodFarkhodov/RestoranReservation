@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Repository
@@ -28,6 +29,14 @@ public class OrderRepo extends BaseRepo<OrderEntity> {
                 ("from OrderEntity", OrderEntity.class)
                 .getResultList();
     }
+    @Transactional
+    public List<OrderEntity> findOrdersByUserAndRestaurant(UUID restaurantId) {
+        String jpql = "SELECT o FROM OrderEntity o WHERE  o.product.restaurant.id = :restaurantId";
+        return manager.createQuery(jpql, OrderEntity.class)
+                .setParameter("restaurantId", restaurantId)
+                .getResultList();
+    }
+
 
 
 
