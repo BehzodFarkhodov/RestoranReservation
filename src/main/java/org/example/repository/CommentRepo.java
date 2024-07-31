@@ -20,8 +20,15 @@ public class CommentRepo extends BaseRepo<CommentEntity> {
     @Transactional
     public List<CommentEntity> getAllComments() {
         return manager.createQuery
-                ("from  CommentEntity", CommentEntity.class)
-                .getResultList();
+                ("select c from CommentEntity c", CommentEntity.class).getResultList();
+    }
+
+
+    @Transactional
+    public void deleteComment(UUID comment) {
+
+        CommentEntity commentEntity = manager.find(CommentEntity.class, comment);
+        manager.remove(commentEntity);
     }
     @Transactional
     public List<CommentEntity> findCommentsByRestaurantId(UUID restaurantId) {

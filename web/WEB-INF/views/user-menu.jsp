@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,7 @@
             background-color: #f4f4f4;
             margin: 40px;
         }
+
         .container {
             background: white;
             max-width: 500px;
@@ -18,15 +19,18 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
+
         h2, h3 {
             text-align: center;
             color: #333;
         }
+
         label {
             margin: 10px 0 5px;
             display: block;
             color: #666;
         }
+
         input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
             width: calc(100% - 22px);
             padding: 10px;
@@ -35,11 +39,13 @@
             border-radius: 5px;
             transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
+
         input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="number"]:focus {
             transform: scale(1.05);
             border-color: #ffeb3b;
             box-shadow: 0 0 5px rgba(255, 235, 59, 0.5);
         }
+
         button, .home-button {
             background-color: #ffeb3b;
             color: #333;
@@ -54,6 +60,7 @@
             border-radius: 5px;
             transition: background-color 0.3s;
         }
+
         button:hover, .home-button:hover {
             background-color: #fdd835;
         }
@@ -93,12 +100,10 @@
         <button type="submit" name="action" value="addBalance">Add to Balance</button>
     </form>
 
-    <!-- Order History -->
     <form method="post" action="user-orders">
         <button type="submit" name="action" value="${user.getId()}">Order History</button>
     </form>
 
-    <!-- My Reservations Button -->
     <form method="post" action="user-reservations">
         <button type="submit" name="action" value="${user.getId()}">My Reservations</button>
     </form>
