@@ -45,20 +45,6 @@ public class OrderController {
         return "order";
     }
 
- /*   @RequestMapping(value = "/save-order", method = RequestMethod.POST)
-    public String save(@ModelAttribute OrderEntity order, Model model, HttpSession session) {
-
-        UUID userId = (UUID) session.getAttribute("userId");
-
-        if (Objects.isNull(userId)) {
-            return "404";
-        }
-        order.setUser(userService.findById(userId));
-        orderService.save(order);
-        List<OrderEntity> orderEntities = orderService.findAll();
-        model.addAttribute("orders", orderEntities);
-        return "order";
-    }*/
 
     @RequestMapping(value = "/save-order", method = RequestMethod.POST)
     public String save(@ModelAttribute OrderEntity order, Model model, HttpSession session) {
