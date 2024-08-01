@@ -7,12 +7,9 @@
     import org.example.entity.UserEntity;
     import org.example.enumertaror.RestaurantType;
     import org.example.service.FileService;
-    import org.example.service.ReservationService;
     import org.example.service.RestaurantService;
     import org.example.service.UserService;
     import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.http.HttpStatus;
-    import org.springframework.http.ResponseEntity;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.web.bind.annotation.*;

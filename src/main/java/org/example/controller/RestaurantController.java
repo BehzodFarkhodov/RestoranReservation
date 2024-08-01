@@ -51,7 +51,6 @@ public class RestaurantController {
             restaurantService.save(restaurant);
 
         model.addAttribute("restaurants", restaurantService.findAllByOwner(restaurant.getOwner().getId()));
-
         return "redirect:/restaurants";
     }
 

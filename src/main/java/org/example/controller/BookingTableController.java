@@ -2,11 +2,9 @@ package org.example.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.example.entity.OrderEntity;
 import org.example.entity.ReservationEntity;
 import org.example.entity.RestaurantEntity;
 import org.example.entity.UserEntity;
-import org.example.service.ReservationService;
 import org.example.service.RestaurantService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
