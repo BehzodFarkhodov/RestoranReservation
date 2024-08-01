@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FileService {
-    private String uploadPath = "C:\\Users\\Victus\\IdeaProjects\\RestoranReservationt\\web\\pictures";
+    private String uploadPath = "C:\\Users\\Victus\\IdeaProjects\\RestoranReservationt\\web\\picture";
 //    public String saveFile(Part part, boolean isImage) {
 //        if (isImage) {
 //            checkImageContentType(part);
