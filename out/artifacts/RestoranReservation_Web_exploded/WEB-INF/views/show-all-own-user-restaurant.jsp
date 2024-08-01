@@ -113,6 +113,7 @@
                         <p>Phone: ${restaurant.phone}</p>
                         <div class="action-buttons">
                             <!-- Delete Button -->
+
                             <form action="${pageContext.request.contextPath}/delete-restaurant" method="post">
                                 <input type="hidden" name="restaurantId" value="${restaurant.id}">
                                 <button type="submit" class="btn delete-btn">Delete</button>
