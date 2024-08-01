@@ -37,7 +37,7 @@ public class ProductController {
     private UserService userService;
 
     @GetMapping("/create-own-product")
-    public String showCreateProductForm(Model model,HttpSession session) {
+    public String showCreateProductForm(Model model, HttpSession session) {
         UUID userId = (UUID) session.getAttribute("userId");
         if (userId == null) {
             return "redirect:/register";
@@ -46,6 +46,7 @@ public class ProductController {
         model.addAttribute("restaurants", restaurantService.findAllByOwner(userId));
         return "create-own-product";
     }
+
     @PostMapping("/create-own-product")
     public String createProduct(@ModelAttribute ProductDTO productDTO,
                                 @RequestParam("imageFile") MultipartFile file,
@@ -98,7 +99,6 @@ public class ProductController {
     }
 
 
-
     @GetMapping("/view-restaurant")
     public String viewRestaurantProducts(@RequestParam("id") UUID id, Model model) {
         List<ProductEntity> products = productService.getProductsByRestaurant(id);
@@ -107,41 +107,40 @@ public class ProductController {
     }
 
 
-
-
     @PostMapping("/view-own-restaurant")
-    public String viewOwnRestaurantProduct(@RequestParam("restaurantId") UUID id,Model model){
+    public String viewOwnRestaurantProduct(@RequestParam("restaurantId") UUID id, Model model) {
         List<ProductEntity> productEntities = productService.getProductsByRestaurant(id);
-        model.addAttribute("products",productEntities);
+        model.addAttribute("products", productEntities);
         return "view-own-restaurant-product";
     }
 
 
-
-
-
-
     @PostMapping("/delete-product")
     public String deleteProduct(@RequestParam("productId") UUID productId, Model model) {
+        ProductEntity product = productService.getProductById(productId);
         try {
             productService.delete(productId);
             model.addAttribute("successMessage", "Product successfully deleted");
         } catch (IllegalStateException e) {
             return "error";
         }
-        List<ProductEntity> products = productService.findAll();
-        model.addAttribute("products", products);
-        return "create-own-restaurant-main";
+        List<ProductEntity> productsByRestaurant = productService.getProductsByRestaurant(product.getRestaurant().getId());
+        model.addAttribute("products", productsByRestaurant);
+        return "view-own-restaurant-product";
     }
 
+
     @GetMapping("/update-product")
-    public ModelAndView showUpdateForm(@RequestParam("productId") UUID productId) {
+    public ModelAndView showUpdateForm(@RequestParam("productId") UUID productId, Model model) {
         ProductEntity product = productService.getProductById(productId);
         if (product == null) {
             return new ModelAndView("error").addObject("message", "Product not found");
         }
+        List<ProductEntity> productsByRestaurant = productService.getProductsByRestaurant(product.getRestaurant().getId());
+        model.addAttribute("products", productsByRestaurant);
         return new ModelAndView("update-product").addObject("product", product);
     }
+
 
     @PostMapping("/update-product")
     public String updateProduct(
@@ -152,7 +151,7 @@ public class ProductController {
             @RequestParam("quantity") int quantity,
             @RequestParam("imagePath") String imagePath,
             HttpSession session,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes, Model model) {
 
         try {
             //UserEntity owner = (UserEntity) session.getAttribute("userId");
@@ -175,7 +174,9 @@ public class ProductController {
             product.setOwner(product.getOwner());
             productService.updateProduct(product);
             redirectAttributes.addFlashAttribute("successMessage", "Mahsulot muvaffaqiyatli yangilandi");
-            return "create-own-restaurant-main";
+            List<ProductEntity> productsByRestaurant = productService.getProductsByRestaurant(product.getRestaurant().getId());
+            model.addAttribute("products", productsByRestaurant);
+            return "view-own-restaurant-product";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Mahsulotni yangilashda xato: " + e.getMessage());
             return "error";

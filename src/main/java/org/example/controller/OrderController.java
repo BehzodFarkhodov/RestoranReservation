@@ -37,13 +37,17 @@ public class OrderController {
     public String savePage(@RequestParam("productId") UUID productId, Model model) {
         ProductEntity product = productService.findById(productId);
 
+
         OrderEntity order = new OrderEntity();
         order.setProduct(product);
         model.addAttribute("order", order);
         model.addAttribute("product", product);
 
+
         return "order";
     }
+
+
 
 
     @RequestMapping(value = "/save-order", method = RequestMethod.POST)
@@ -61,11 +65,12 @@ public class OrderController {
             return "404";
         }
 
-        double productPrice = product.getPrice();
+        double productPrice = product.getPrice() * order.getQuantity();
         double userBalance = user.getBalance();
 
         if (userBalance < productPrice) {
             model.addAttribute("errorMessage", "Sizning balansingiz yetarli emas.");
+            model.addAttribute("product", product);
             return "order";
         }
 
@@ -77,11 +82,13 @@ public class OrderController {
         order.setUser(user);
         orderService.save(order);
 
-        List<OrderEntity> orderEntities = orderService.findAll();
-        model.addAttribute("orders", orderEntities);
-
-        return "order";
+        List<ProductEntity> products = productService.getProductsByRestaurant(product.getRestaurant().getId());
+        model.addAttribute("products", products);
+        System.out.println(products);
+        return "products";
     }
+
+
 
 
     @RequestMapping("/show-restaurant-order")
@@ -91,8 +98,12 @@ public class OrderController {
         return "users-restaurant-order";
     }
 
+
+
+
+
     @RequestMapping("/view-own-order-restaurant")
-    public String showRestaurantOwnOrder(@RequestParam("restaurantId")UUID restaurantId, Model model,HttpSession session){
+    public String showRestaurantOwnOrder(@RequestParam("restaurantId") UUID restaurantId, Model model, HttpSession session) {
         UUID userId = (UUID) session.getAttribute("userId");
 
         if (userId == null) {
@@ -105,14 +116,22 @@ public class OrderController {
 
 
 
-    @RequestMapping(value = "/accept-order",method = RequestMethod.POST)
-    public String acceptOrders(@RequestParam("orderId") UUID orderId, RedirectAttributes redirectAttributes) {
+
+
+
+    @RequestMapping(value = "/accept-order", method = RequestMethod.POST)
+    public String acceptOrders(@RequestParam("orderId") UUID orderId, RedirectAttributes redirectAttributes, Model model) {
         OrderEntity order = orderService.findById(orderId);
         order.setStatus("ACCEPTED");
         orderService.save(order);
+
         redirectAttributes.addFlashAttribute("message", "Reservation accepted and user notified!");
+        List<OrderEntity> ordersByProductAndRestaurant = orderService.findOrdersByProductAndRestaurant(order.getProduct().getId(), order.getProduct().getRestaurant().getId());
+        model.addAttribute("orders", ordersByProductAndRestaurant);
         return "users-restaurant-order";
     }
+
+
 
 
 
@@ -127,21 +146,32 @@ public class OrderController {
         return "show-accepted-orders";
     }
 
+
+
+
+
     @RequestMapping(value = "/cancel-order", method = RequestMethod.POST)
-    public String cancelOrder(@RequestParam("orderId") UUID orderId, RedirectAttributes redirectAttributes) {
+    public String cancelOrder(@RequestParam("orderId") UUID orderId,Model model,HttpSession session, RedirectAttributes redirectAttributes) {
+        UUID userId = (UUID) session.getAttribute("userId");
         try {
+            OrderEntity order = orderService.findById(orderId);
+            double num = order.getProduct().getPrice() * order.getQuantity();
+
+
+            UserEntity user = userService.findById(userId);
+            user.setBalance(user.getBalance() + num);
+            userService.save(user);
+
             orderService.deleteOrder(orderId);
             redirectAttributes.addFlashAttribute("message", "Order successfully canceled!");
         } catch (IllegalStateException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
-        return "user-menu";
+
+        List<OrderEntity> orderByUserId = orderService.findOrderByUserId(userId);
+        model.addAttribute("orders", orderByUserId);
+        return "user-orders";
     }
-
-
-
-
-
 
 
 }

@@ -3,6 +3,7 @@ package org.example.controller;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.example.entity.OrderEntity;
+import org.example.entity.RestaurantEntity;
 import org.example.entity.UserEntity;
 import org.example.service.RestaurantService;
 import org.example.service.UserService;
@@ -75,36 +76,42 @@ public class UserController {
     }
 
     @RequestMapping("/update-profile")
-    public String updateProfile(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("currentPassword") String currentPassword, @RequestParam("email") String email, HttpSession session) {
-
-        if (password == null || password.isEmpty()) {
-            password = currentPassword;
-        }
-
-        List<OrderEntity> userOrders = userService.updateProfile(username, password, email);
-        session.setAttribute("orders", userOrders);
-        return "main";
-    }
-
-    @RequestMapping("/user-menu")
-    public String showUserMenu(HttpSession session) {
+    public String updateProfile(@RequestParam("username") String username,Model model,
+//                                @RequestParam("password") String password,
+                                @RequestParam("currentPassword") String currentPassword,
+                                @RequestParam("email") String email, HttpSession session) {
         UUID userId = (UUID) session.getAttribute("userId");
-        if (userId == null) {
-            return "404";
-        }
-        session.setAttribute("user", userService.getUser((UUID) session.getAttribute("userId")));
+        UserEntity user = userService.updateProfile(userId, username, currentPassword, email);
+        model.addAttribute("user", user);
         return "user-menu";
     }
 
 
+    @RequestMapping("/user-menu")
+    public String showUserMenu(HttpSession session, Model model) {
+        UUID userId = (UUID) session.getAttribute("userId");
+        if (userId == null) {
+            return "404";
+        }
+        model.addAttribute("user", userService.getUser(userId));
+        return "user-menu";
+    }
+
+
+
+
     @RequestMapping("/update-balance")
-    public String updateBalance(@RequestParam("adjustBalance") double balance, HttpSession session) {
-        UserEntity user = (UserEntity) session.getAttribute("user");
+    public String updateBalance(@RequestParam("adjustBalance") double balance, HttpSession session, Model model) {
+        UUID userId = (UUID) session.getAttribute("userId");
+        UserEntity user = userService.getUser(userId);
         balance = user.getBalance() + balance;
         user.setBalance(balance);
         userService.save(user);
-        return "main";
+        UserEntity user1 = userService.getUser(userId);
+        model.addAttribute("user", user1);
+        return "user-menu";
     }
+
 
     @RequestMapping("/user-orders")
     public String showUserOrders(HttpSession session) {

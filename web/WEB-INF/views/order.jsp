@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,7 +10,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            color: #000; /* Default text color set to black */
+            color: #000;
         }
 
         .product-details {
@@ -53,7 +54,7 @@
 
         .form-group label {
             font-weight: bold;
-            color: #000; /* Label color set to black */
+            color: #000;
         }
 
         .home-button {
@@ -84,14 +85,21 @@
         }
 
         .product-details h1, .product-details h3, .product-details p, .order-form h2 {
-            color: #000; /* Set the color of these elements to black */
+            color: #000;
+        }
+
+        .error {
+            color: red; /* Error xabarining rangini qizilga o'rnatish */
+            font-size: 18px; /* Error xabarining font o'lchamini kattaroq qilish */
+            font-weight: bold; /* Yozuvni qalin qilish */
+            margin-top: 20px; /* Error xabarining yuqorisida bo'sh joy qo'shish */
+            text-align: center; /* Matnni markazga yo'naltirish */
         }
     </style>
 </head>
 <body>
 <div class="container">
     <a href="${pageContext.request.contextPath}/" class="home-button">Home</a>
-    <!-- Product Details -->
     <div class="product-details">
         <h1>${product.foodName}</h1>
         <div class="product-info">
@@ -117,6 +125,11 @@
 
             <button type="submit" class="btn btn-primary">Order</button>
         </form>
+    </div>
+    <div class="error">
+        <c:if test="${not empty errorMessage}">
+            ${errorMessage}
+        </c:if>
     </div>
 </div>
 

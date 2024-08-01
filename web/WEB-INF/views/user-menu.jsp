@@ -70,12 +70,8 @@
 </head>
 <body>
 <div class="container">
-    <!-- Home Button -->
     <a href="${pageContext.request.contextPath}/" class="home-button">Home</a>
-
     <h2>User Profile</h2>
-
-    <!-- Profile Update Form -->
     <form action="update-profile" method="post">
         <h3>Update Profile</h3>
         <label for="username">Username:</label>
@@ -90,8 +86,6 @@
 
         <button type="submit" name="action" value="updateProfile">Update Profile</button>
     </form>
-
-    <!-- Balance Update Form -->
     <form action="update-balance" method="post">
         <h3>Adjust Balance</h3>
         <label for="currentBalance">Current Balance:</label>
