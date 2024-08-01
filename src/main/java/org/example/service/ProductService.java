@@ -15,18 +15,12 @@ import java.util.UUID;
 public class ProductService extends BaseService<ProductEntity, ProductRepository> {
 
 
-
-
-
-
     public ProductService(ProductRepository repository) {
         super(repository);
     }
 
-
     @Autowired
     private ProductRepository productRepository;
-
 
     public ProductEntity save(ProductEntity productEntity) {
         return productRepository.save(productEntity);
@@ -47,18 +41,38 @@ public class ProductService extends BaseService<ProductEntity, ProductRepository
 
 
     public ProductEntity getProductById(UUID id) {
-        Optional<ProductEntity> byId = Optional.ofNullable(productRepository.findById(id));
-        return byId.orElse(null);
-
+        Optional<ProductEntity> byId = Optional.of(productRepository.findById(id));
+        return byId.get();
     }
-
     @Transactional
+
     public void delete(UUID id) {
+
         productRepository.delete(id);
     }
 
+//    @Transactional
+//    public void updateProduct(ProductEntity productEntity) {
+//        if (productRepository.hasOrders(productEntity.getId())) {
+//            throw new IllegalStateException("Cannot update product with existing orders.");
+//        }
+//        productRepository.save(productEntity);
+//    }
 
 
 
-
+    @Transactional
+    public void updateProduct(ProductEntity productEntity) {
+        ProductEntity existingProduct = productRepository.findById(productEntity.getId());
+        if (productRepository.hasOrders(productEntity.getId())) {
+            throw new IllegalStateException("Buyurtmalar mavjud bo‘lgan mahsulotni yangilash mumkin emas.");
+        }
+        existingProduct.setFoodName(productEntity.getFoodName());
+        existingProduct.setFoodDescription(productEntity.getFoodDescription());
+        existingProduct.setPrice(productEntity.getPrice());
+        existingProduct.setQuantity(productEntity.getQuantity());
+        existingProduct.setImagePath(productEntity.getImagePath());
+        existingProduct.setOwner(productEntity.getOwner());
+        productRepository.save(existingProduct);
+    }
 }

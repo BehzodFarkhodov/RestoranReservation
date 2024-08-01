@@ -1,9 +1,13 @@
 package org.example.repository;
+import jakarta.persistence.TypedQuery;
 import org.example.entity.OrderEntity;
+import org.example.entity.ReservationEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.*;
 import java.util.List;
+import java.util.UUID;
 
 
 @Repository
@@ -28,6 +32,35 @@ public class OrderRepo extends BaseRepo<OrderEntity> {
                 ("from OrderEntity", OrderEntity.class)
                 .getResultList();
     }
+    @Transactional
+    public List<OrderEntity> findOrdersByUserAndRestaurant(UUID restaurantId) {
+        String jpql = "SELECT o FROM OrderEntity o WHERE  o.product.restaurant.id = :restaurantId";
+        return manager.createQuery(jpql, OrderEntity.class)
+                .setParameter("restaurantId", restaurantId)
+                .getResultList();
+    }
+
+    @Transactional
+    public List<OrderEntity> findAcceptedOrdersByUserId(UUID userId) {
+        String jpql = "SELECT r FROM OrderEntity r WHERE r.user.id = :userId AND r.status = 'ACCEPTED'";
+        TypedQuery<OrderEntity> query = manager.createQuery(jpql, OrderEntity.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
+    @Transactional
+    public void deleteById(UUID id) {
+        OrderEntity order = manager.find(OrderEntity.class, id);
+        if (order != null) {
+            manager.remove(order);
+        }
+    }
+
+
+
+
+
+
 
 
 

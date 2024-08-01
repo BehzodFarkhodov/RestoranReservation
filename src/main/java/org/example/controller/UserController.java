@@ -56,12 +56,14 @@ public class UserController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@ModelAttribute UserEntity user, HttpSession session, Model model) {
-        UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
-
-        if (!(loggedInUser.getPassword().equals(user.getPassword()))) {
-            model.addAttribute("errorMessage", "Username or password is incorrect");
+        UserEntity loggedInUser;
+        try {
+            loggedInUser = userService.login(user.getEmail(), user.getPassword());
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Invalid username or password");
             return "login";
         }
+
         session.setAttribute("userId", loggedInUser.getId());
 
         if (user.getEmail().equals("behzodfarhodov13@gmail.com")) {
@@ -71,21 +73,6 @@ public class UserController {
             return "main";
         }
     }
-
-
-//    @RequestMapping(value = "login", method = RequestMethod.POST)
-//    public String login(@ModelAttribute UserEntity user, HttpSession session) {
-//        UserEntity loggedInUser = userService.login(user.getEmail(), user.getPassword());
-//
-//        if (loggedInUser != null && loggedInUser.getEmail().equals("behzodfarhodov13@gmail.com")) {
-//            session.setAttribute("userId", loggedInUser.getId());
-//            return "create-restaurant";
-//        } else {
-//            session.setAttribute("user", loggedInUser);
-//            return "main";
-//        }
-//    }
-
 
     @RequestMapping("/update-profile")
     public String updateProfile(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("currentPassword") String currentPassword, @RequestParam("email") String email, HttpSession session) {
@@ -102,7 +89,7 @@ public class UserController {
     @RequestMapping("/user-menu")
     public String showUserMenu(HttpSession session) {
         UUID userId = (UUID) session.getAttribute("userId");
-        if(userId ==null){
+        if (userId == null) {
             return "404";
         }
         session.setAttribute("user", userService.getUser((UUID) session.getAttribute("userId")));

@@ -34,15 +34,7 @@ public class RestaurantController {
         return "create-restaurant";
     }
 
-
-
-//    @RequestMapping("/create-restaurant")
-//    public String createRestaurant(@ModelAttribute RestaurantEntity restaurant, Model model) {
-//        restaurantService.save(restaurant);
-//        return "redirect:/restaurants";
-//    }
-
-    @PostMapping(value = "/create-restaurant")
+    @RequestMapping(value = "/create-restaurant",method = RequestMethod.POST)
     public String createRestaurant(@ModelAttribute RestaurantEntity restaurant,
                                    @RequestParam("picture") MultipartFile file) {
 
@@ -60,13 +52,13 @@ public class RestaurantController {
         return "redirect:/restaurants";
     }
 
-    @RequestMapping("/restaurants")
+    @GetMapping("/restaurants")
     public String getAllRestaurants(Model model) {
         model.addAttribute("restaurants", restaurantService.getAll());
         return "restaurants";
     }
 
-    @RequestMapping("/search")
+    @GetMapping("/search")
     public String searchRestaurants(@RequestParam(value = "location", required = false) String location,
                                     @RequestParam(value = "name", required = false) String name,
                                     @RequestParam(value = "address", required = false) String address,
