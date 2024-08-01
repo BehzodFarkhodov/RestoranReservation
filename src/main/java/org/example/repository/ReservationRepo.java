@@ -64,6 +64,14 @@ public class ReservationRepo extends BaseRepo<ReservationEntity> {
         }
     }
 
+    @Transactional
+    public List<ReservationEntity> findReservationByUserId(UUID userId){
+        String jpql = "SELECT r FROM ReservationEntity r WHERE r.user.id = :userId";
+        TypedQuery<ReservationEntity> query = manager.createQuery(jpql, ReservationEntity.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
 
 
 

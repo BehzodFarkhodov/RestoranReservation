@@ -64,8 +64,8 @@
             <div class="form-group">
                 <label for="restaurant" class="form-label">Select Restaurant</label>
                 <select id="restaurant" name="restaurantId" class="form-control" required>
-                    <c:forEach var="restaurant" items="${restaurants}">
-                        <option value="${restaurant.id}">${restaurant.name}</option>
+                    <c:forEach var="restaurant" items="${restaurants">
+                        <option value="${restaurant.id}">${restaurant.}name}</option>
                     </c:forEach>
                 </select>
             </div>

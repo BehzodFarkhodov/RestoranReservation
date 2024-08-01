@@ -25,7 +25,6 @@ public class RestaurantEntity extends BaseEntity {
     @OneToMany
     @ToString.Exclude
     private List<ProductEntity> menu;
-
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity owner;
