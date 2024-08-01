@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
+
 @Service
 public class ReservationService extends BaseService<ReservationEntity, ReservationRepo> {
 
@@ -34,10 +35,10 @@ public class ReservationService extends BaseService<ReservationEntity, Reservati
     }
 
 
-
     public ReservationEntity findById(UUID id) {
         return repository.findById(id);
     }
+
     public List<ReservationEntity> findAcceptedReservationsByUserId(UUID userId) {
         return repository.findAcceptedReservationsByUserId(userId);
     }
@@ -52,12 +53,5 @@ public class ReservationService extends BaseService<ReservationEntity, Reservati
             throw new IllegalStateException("Cannot cancel an accepted reservation");
         }
     }
-
-
-
-
-
-
-
-
 }
+

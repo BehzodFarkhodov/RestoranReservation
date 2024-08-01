@@ -11,7 +11,11 @@
     <title>Show Restoran</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/show-all-restaurant"></a>
+
+
+
+
+
 <div class="container">
     <h1 class="text-center mb-4">All Restaurants</h1>
     <div class="row g-4">
