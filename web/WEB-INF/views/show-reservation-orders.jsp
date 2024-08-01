@@ -25,8 +25,8 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             position: absolute;
-            top: 20px; /* Adjust to fit your needs */
-            left: 20px; /* Adjust to fit your needs */
+            top: 20px;
+            left: 20px;
         }
         .home-button:hover {
             background-color: #ec971f;
