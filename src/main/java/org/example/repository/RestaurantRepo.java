@@ -19,7 +19,8 @@ public class RestaurantRepo extends BaseRepo<RestaurantEntity> {
     private void init() {
         this.type = RestaurantEntity.class;
     }
-//    @Transactional
+
+    //    @Transactional
 //    public String save(RestaurantEntity entity) {
 //        manager.persist(entity);
 //        return "saved";
@@ -29,15 +30,15 @@ public class RestaurantRepo extends BaseRepo<RestaurantEntity> {
 //        manager.persist(restaurant);
 //        return restaurant;
 //    }
-@Transactional
-public RestaurantEntity save(RestaurantEntity restaurant) {
-    if (restaurant.getId() == null) {
-        manager.persist(restaurant);
-    } else {
-        manager.merge(restaurant);
+    @Transactional
+    public RestaurantEntity save(RestaurantEntity restaurant) {
+        if (restaurant.getId() == null) {
+            manager.persist(restaurant);
+        } else {
+            manager.merge(restaurant);
+        }
+        return restaurant;
     }
-    return restaurant;
-}
 
     public List<RestaurantEntity> findAll() {
         return manager.createQuery("from RestaurantEntity", RestaurantEntity.class).getResultList();
@@ -84,6 +85,7 @@ public RestaurantEntity save(RestaurantEntity restaurant) {
                 .setParameter("userId", userId)
                 .getResultList();
     }
+
     @Transactional
     public boolean hasProducts(UUID restaurantId) {
         String query = "SELECT COUNT(p) FROM ProductEntity p WHERE p.restaurant.id = :restaurantId";
@@ -92,23 +94,14 @@ public RestaurantEntity save(RestaurantEntity restaurant) {
                 .getSingleResult();
         return count > 0;
     }
-   @Transactional
+
+    @Transactional
     public void deleteById(UUID restaurantId) {
         RestaurantEntity restaurant = manager.find(RestaurantEntity.class, restaurantId);
         if (restaurant != null) {
             manager.remove(restaurant);
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
