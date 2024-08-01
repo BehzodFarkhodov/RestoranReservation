@@ -1,10 +1,10 @@
 package org.example.controller;
 
 import jakarta.servlet.http.HttpSession;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
+
 import org.example.entity.OrderEntity;
 import org.example.entity.ProductEntity;
-import org.example.entity.ReservationEntity;
+
 import org.example.entity.UserEntity;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
@@ -61,7 +61,7 @@ public class OrderController {
             return "404";
         }
 
-        double productPrice = product.getPrice();
+        double productPrice = product.getPrice() * product.getQuantity();
         double userBalance = user.getBalance();
 
         if (userBalance < productPrice) {
@@ -92,7 +92,7 @@ public class OrderController {
     }
 
     @RequestMapping("/view-own-order-restaurant")
-    public String showRestaurantOwnOrder(@RequestParam("restaurantId")UUID restaurantId, Model model,HttpSession session){
+    public String showRestaurantOwnOrder(@RequestParam("restaurantId") UUID restaurantId, Model model, HttpSession session) {
         UUID userId = (UUID) session.getAttribute("userId");
 
         if (userId == null) {
@@ -104,8 +104,7 @@ public class OrderController {
     }
 
 
-
-    @RequestMapping(value = "/accept-order",method = RequestMethod.POST)
+    @RequestMapping(value = "/accept-order", method = RequestMethod.POST)
     public String acceptOrders(@RequestParam("orderId") UUID orderId, RedirectAttributes redirectAttributes) {
         OrderEntity order = orderService.findById(orderId);
         order.setStatus("ACCEPTED");
@@ -113,7 +112,6 @@ public class OrderController {
         redirectAttributes.addFlashAttribute("message", "Reservation accepted and user notified!");
         return "users-restaurant-order";
     }
-
 
 
     @RequestMapping(value = "/show-accepted-orders", method = RequestMethod.GET)
@@ -137,11 +135,6 @@ public class OrderController {
         }
         return "user-menu";
     }
-
-
-
-
-
 
 
 }
