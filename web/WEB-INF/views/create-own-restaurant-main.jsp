@@ -89,15 +89,15 @@
         <div class="col-md-6">
             <a class="btn button" href="${pageContext.request.contextPath}/show-all-users-restaurant">My All Restaurant Accounts</a>
         </div>
-        <div class="col-md-6">
-            <a class="btn button" href="${pageContext.request.contextPath}/show-restaurant-order">Show Restaurant's Orders</a>
-        </div>
-        <div class="col-md-6">
-            <a class="btn button" href="${pageContext.request.contextPath}/show-restaurant-reservation-order">Show Restaurant's Reservation Orders</a>
-        </div>
-        <div class="col-md-6">
-            <a class="btn button" href="${pageContext.request.contextPath}/show-restaurant-comments?id=${restaurant.id}">Show Restaurant's Comments</a>
-        </div>
+<%--        <div class="col-md-6">--%>
+<%--            <a class="btn button" href="${pageContext.request.contextPath}/show-restaurant-order">Show Restaurant's Orders</a>--%>
+<%--        </div>--%>
+<%--        <div class="col-md-6">--%>
+<%--            <a class="btn button" href="${pageContext.request.contextPath}/show-restaurant-reservation-order">Show Restaurant's Reservation Orders</a>--%>
+<%--        </div>--%>
+<%--        <div class="col-md-6">--%>
+<%--            <a class="btn button" href="${pageContext.request.contextPath}/show-restaurant-comments?id=${restaurant.id}">Show Restaurant's Comments</a>--%>
+<%--        </div>--%>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

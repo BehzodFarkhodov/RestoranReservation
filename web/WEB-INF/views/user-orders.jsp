@@ -52,10 +52,10 @@
             transition: background-color 0.3s, transform 0.2s;
         }
         .cancel-button:hover {
-            background-color: #c82333; /* Yengilroq qizil rang (hover effekti) */
+            background-color: #c82333;
         }
         .cancel-button:active {
-            transform: scale(0.95); /* Qimirlaydigan effekt */
+            transform: scale(0.95);
         }
     </style>
 </head>

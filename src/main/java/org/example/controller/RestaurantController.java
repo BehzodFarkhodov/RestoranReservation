@@ -36,7 +36,8 @@ public class RestaurantController {
 
     @RequestMapping(value = "/create-restaurant",method = RequestMethod.POST)
     public String createRestaurant(@ModelAttribute RestaurantEntity restaurant,
-                                   @RequestParam("picture") MultipartFile file) {
+                                   @RequestParam("picture") MultipartFile file,
+                                   Model model) {
 
             if (!file.isEmpty()) {
                 String picturePath = null;
@@ -48,6 +49,8 @@ public class RestaurantController {
                 restaurant.setPicturePath(picturePath);
             }
             restaurantService.save(restaurant);
+
+        model.addAttribute("restaurants", restaurantService.findAllByOwner(restaurant.getOwner().getId()));
 
         return "redirect:/restaurants";
     }
