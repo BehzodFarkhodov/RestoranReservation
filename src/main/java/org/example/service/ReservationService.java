@@ -1,5 +1,4 @@
 package org.example.service;
-
 import org.example.entity.OrderEntity;
 import org.example.entity.ReservationEntity;
 import org.example.entity.UserEntity;
@@ -53,6 +52,12 @@ public class ReservationService extends BaseService<ReservationEntity, Reservati
             throw new IllegalStateException("Cannot cancel an accepted reservation");
         }
     }
+
+    public List<ReservationEntity> findReservationByUserId(UUID userId){
+        return repository.findByUserId(userId);
+    }
+
+
 }
 
 

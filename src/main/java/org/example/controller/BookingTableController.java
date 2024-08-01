@@ -2,7 +2,6 @@ package org.example.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import org.example.entity.OrderEntity;
 import org.example.entity.ReservationEntity;
 import org.example.entity.RestaurantEntity;
 import org.example.entity.UserEntity;
@@ -215,13 +214,17 @@ public class BookingTableController {
 
 
     @RequestMapping(value = "/cancel-reservation", method = RequestMethod.POST)
-    public String cancelOrder(@RequestParam("reservationId") UUID reservationId, RedirectAttributes redirectAttributes) {
+    public String cancelOrder(@RequestParam("reservationId") UUID reservationId,HttpSession session,Model model, RedirectAttributes redirectAttributes) {
         try {
             reservationService.deleteOrder(reservationId);
             redirectAttributes.addFlashAttribute("message", "Order successfully canceled!");
         } catch (IllegalStateException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
+        UUID userId = (UUID) session.getAttribute("userId");
+
+        List<ReservationEntity> reservationByUserId = reservationService.findReservationByUserId(userId);
+        model.addAttribute("reservations", reservationByUserId);
         return "show-user-order-history";
     }
 

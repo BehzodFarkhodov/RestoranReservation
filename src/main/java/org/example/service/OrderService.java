@@ -63,6 +63,14 @@ public class OrderService extends BaseService<OrderEntity,OrderRepo> {
         }
     }
 
+    public List<OrderEntity> findOrdersByProductAndRestaurant(UUID productId, UUID restaurantId) {
+        return repository.findOrdersByProductAndRestaurant(productId, restaurantId);
+    }
+
+    public List<OrderEntity> findOrderByUserId(UUID userId) {
+        return repository.findOrderByUserId(userId);
+    }
+
 
 
 }

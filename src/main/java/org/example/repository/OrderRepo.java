@@ -2,6 +2,7 @@ package org.example.repository;
 import jakarta.persistence.TypedQuery;
 import org.example.entity.OrderEntity;
 import org.example.entity.ReservationEntity;
+import org.hibernate.query.Order;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,9 @@ public class OrderRepo extends BaseRepo<OrderEntity> {
                 .getResultList();
     }
 
+
+
+
     @Transactional
     public List<OrderEntity> findAcceptedOrdersByUserId(UUID userId) {
         String jpql = "SELECT r FROM OrderEntity r WHERE r.user.id = :userId AND r.status = 'ACCEPTED'";
@@ -55,6 +59,24 @@ public class OrderRepo extends BaseRepo<OrderEntity> {
             manager.remove(order);
         }
     }
+    @Transactional
+    public List<OrderEntity> findOrdersByProductAndRestaurant(UUID productId, UUID restaurantId) {
+        String jpql = "SELECT o FROM OrderEntity o WHERE o.product.id = :productId AND o.product.restaurant.id = :restaurantId";
+        return manager.createQuery(jpql, OrderEntity.class)
+                .setParameter("productId", productId)
+                .setParameter("restaurantId", restaurantId)
+                .getResultList();
+    }
+
+    @Transactional
+    public List<OrderEntity> findOrderByUserId(UUID userId) {
+        String jpql = "SELECT o FROM OrderEntity o WHERE o.user.id = :userId";
+        return manager.createQuery(jpql,OrderEntity.class)
+                .setParameter("userId",userId)
+                .getResultList();
+    }
+
+
 
 
 

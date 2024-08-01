@@ -61,18 +61,12 @@ public class UserService extends BaseService<UserEntity, UserRepo> {
         return repository.balance(id, amount);
     }
 
-    public List<OrderEntity> updateProfile(String username, String password, String email) {
-        Optional<UserEntity> userEntity = repository.findByEmail(email);
-        if (userEntity.isPresent()) {
-            UserEntity user = userEntity.get();
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setEmail(email);
-            userRepo.save(user);
-
-            return userRepo.getOrders(email);
-        }
-        return null;
+    public UserEntity updateProfile(UUID userId, String username, String password, String email) {
+        UserEntity user = repository.findById(userId);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        return userRepo.save(user);
     }
 
     public UserEntity getUser(UUID userId) {
