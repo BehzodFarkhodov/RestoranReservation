@@ -16,7 +16,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-image: url('https://get.wallhere.com/photo/city-night-evening-bar-restaurant-palace-lighting-61155.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             padding: 40px;
         }
         .home-btn {
@@ -50,9 +54,9 @@
         }
         .restaurant-card img {
             max-width: 100%;
-            border-bottom: 3px solid #ffcc00; /* Yellow border */
-            height: 200px; /* Fixed height for images */
-            object-fit: cover; /* Ensure the image covers the area */
+            border-bottom: 3px solid #ffcc00;
+            height: 200px;
+            object-fit: cover;
         }
         .restaurant-info {
             padding: 15px;
@@ -63,16 +67,16 @@
             margin: 0 0 10px;
             font-size: 24px;
             color: #333;
-            white-space: nowrap; /* Prevent text from wrapping */
-            overflow: hidden; /* Hide overflow text */
-            text-overflow: ellipsis; /* Add ellipsis to overflow text */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .restaurant-info p {
             margin: 0;
             color: #555;
-            white-space: nowrap; /* Prevent text from wrapping */
-            overflow: hidden; /* Hide overflow text */
-            text-overflow: ellipsis; /* Add ellipsis to overflow text */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .action-buttons {
             display: flex;
@@ -81,24 +85,28 @@
         }
         .delete-btn {
             color: white;
-            background-color: #dc3545; /* Red color */
+            background-color: #dc3545;
             border: none;
         }
         .delete-btn:hover {
-            background-color: #c82333; /* Darker red */
+            background-color: #c82333;
         }
         .view-btn {
             color: white;
-            background-color: #ffcc00; /* Yellow color */
+            background-color: #ffcc00;
             border: none;
         }
         .view-btn:hover {
-            background-color: #e0a800; /* Darker yellow */
+            background-color: #e0a800;
+        }
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/" class="home-btn">Home</a> <!-- Home button -->
+<a href="${pageContext.request.contextPath}/" class="home-btn">Home</a>
 <div class="container">
     <h1 class="text-center mb-4">My Restaurants</h1>
     <div class="row g-4">
