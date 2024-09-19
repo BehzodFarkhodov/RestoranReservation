@@ -1,7 +1,6 @@
 package org.example.repository;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import org.example.entity.BaseEntity;
 import org.springframework.transaction.annotation.Transactional;

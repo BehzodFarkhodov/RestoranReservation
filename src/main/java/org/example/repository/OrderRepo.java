@@ -1,12 +1,10 @@
 package org.example.repository;
 import jakarta.persistence.TypedQuery;
 import org.example.entity.OrderEntity;
-import org.example.entity.ReservationEntity;
-import org.hibernate.query.Order;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.*;
+
 import java.util.List;
 import java.util.UUID;
 

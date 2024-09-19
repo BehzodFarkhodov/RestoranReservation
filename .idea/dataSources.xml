@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="restoran_reservation" uuid="b328c1bc-1ae5-46ce-9104-5050a2c37fb3">
+    <data-source source="LOCAL" name="restoran_reservation@localhost" uuid="f829b3ef-b7fb-40e8-b8ae-843c614bec96">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
